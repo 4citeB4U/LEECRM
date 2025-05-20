@@ -1,0 +1,520 @@
+const allMusicStores = [
+    { name: "Baraboo Music LLC", address: "129 3rd St", city: "Baraboo", state: "WI", zip: "53913", phone: "(608) 355-0207", website: "baraboomusic.com", email: "info@baraboomusic.com", category: "Music Store", visited: false, lat: 43.4714, lng: -89.7442 },
+    { name: "Lincoln Music House", address: "3379 S 13th St", city: "Milwaukee", state: "WI", zip: "53215", phone: "(414) 647-9608", website: "lincolnmusichouse.com", email: "info@lincolnmusichouse.com", category: "Music Store", visited: false, lat: 43.0085, lng: -87.9272 },
+    { name: "Trusty Chords Record Shop", address: "1514 Troy Rd", city: "Edwardsville", state: "IL", zip: "62025", phone: "(618) 307-5909", website: "trustychordsrecordshop.com", email: "info@trustychordsrecordshop.com", category: "Record Store", visited: false, lat: 38.7994, lng: -89.9623 },
+    { name: "Electric Fetus", address: "2001 4th Ave S", city: "Minneapolis", state: "MN", zip: "55404", phone: "(612) 870-9300", website: "electricfetus.com", email: "info@electricfetus.com", category: "Record Store", visited: false, lat: 44.9657, lng: -93.274 },
+    { name: "Elderly Instruments", address: "1100 N Washington Ave", city: "Lansing", state: "MI", zip: "48906", phone: "(517) 372-7880", website: "elderly.com", email: "info@elderly.com", category: "Music Store", visited: false, lat: 42.7502, lng: -84.5541 },
+    { name: "Park Ave CDs", address: "2916 Corrine Dr", city: "Orlando", state: "FL", zip: "32803", phone: "(407) 447-7275", website: "parkavecds.com", email: "info@parkavecds.com", category: "Record Store", visited: false, lat: 28.5685, lng: -81.3453 },
+    { name: "Indy CD & Vinyl", address: "806 Broad Ripple Ave", city: "Indianapolis", state: "IN", zip: "46220", phone: "(317) 259-1012", website: "indycdandvinyl.com", email: "info@indycdandvinyl.com", category: "Record Store", visited: false, lat: 39.8698, lng: -86.1458 },
+    { name: "Grimey's New & Preloved", address: "1060 E Trinity Ln, Suite 101", city: "Nashville", state: "TN", zip: "37216", phone: "(615) 226-3811", website: "grimeys.com", email: "info@grimeys.com", category: "Record Store", visited: false, lat: 36.2077, lng: -86.7494 },
+];Part 10: Wisconsin Music Stores (Batch 1 from new prompt sections)
+(This list had some duplications within itself in your prompt; I've listed unique entries based on the first appearance)
+Store Name	Address	City	ZIP	Phone	Website	Email
+Baraboo Music LLC	129 3rd St	Baraboo	53913	(608) 355-0207	baraboomusic.com	info@baraboomusic.com
+Lincoln Music House	3379 S 13th St	Milwaukee	53215	(414) 647-9608	lincolnmusichouse.com	info@lincolnmusichouse.com
+Uncle Bob’s Music Center	5080 S 108th St	Greenfield	53228	(414) 529-8910	unclebobsmusic.com	info@unclebobsmusic.com
+Outpost Music	1330 S Commercial St	Neenah	54956	(920) 722-9400	outpostmusic.com	info@outpostmusic.com
+Schmitt Music	6750 W Layton Ave	Greenfield	53220	(414) 281-3500	schmittmusic.com	info@schmittmusic.com
+West End Music	1131 N 8th St	Sheboygan	53081	(920) 458-5842	westendmusic.com	info@westendmusic.com
+Music Masters Green Bay	1169 Velp Ave	Green Bay	54303	(920) 499-0700	musicmastersgreenbay.com	info@musicmastersgreenbay.com
+The Guitar Doctor	1802 S 15th St	Sheboygan	53081	(920) 457-1191	guitardoctorwi.com	info@guitardoctorwi.com
+New Frontier Record Exchange	109 N Main St	Oshkosh	54901	(920) 235-1450	N/A	N/A
+Main Street Music	101 W Main St	Sun Prairie	53590	(608) 837-3665	mainstreetmusic.net	info@mainstreetmusic.net
+Spring Valley Music	S430 McKay Ave	Spring Valley	54767	(715) 778-4334	springvalleymusic.com	info@springvalleymusic.com
+Knick Knack Records	100 E Capitol Dr	Hartland	53029	(262) 367-7817	knickknackrecords.com	info@knickknackrecords.com
+Rock N Roll Land	504 S Military Ave	Green Bay	54303	(920) 490-2881	rocknrollland.com	info@rocknrollland.com
+Instrumental Music Co	920 S Military Ave	Green Bay	54304	(920) 498-2228	instrumental-music.com	info@instrumental-music.com
+Lloyd’s Guitars	2747 Manitowoc Rd	Green Bay	54311	(920) 857-3767	lloydsguitars.com	info@lloydsguitars.com
+Jim Zill Guitar Repair	1624 Losey Blvd S	La Crosse	54601	(608) 785-7704	jimzguitarrepair.com	info@jimzguitarrepair.com
+Offbeats Violin & Guitar	1328 W Clairemont Ave	Eau Claire	54701	(715) 832-9392	offbeatsviolin.com	info@offbeatsviolin.com
+Guitar Shop of Wisconsin	2929 E Washington Ave	Madison	53704	(608) 249-5444	guitarshopofwisconsin.com	info@guitarshopofwisconsin.com
+Music Center Inc.	7700 Green Bay Rd	Kenosha	53142	(262) 697-9393	musiccenterinc.com	info@musiccenterinc.com
+Ward-Brodt Music	5976 Executive Dr	Madison	53719	(608) 661-8600	ward-brodt.com	info@ward-brodt.com
+Blue Note Music	1309 Regent St	Madison	53715	(608) 251-5025	bluenotemusic.com	info@bluenotemusic.com
+Part 11: Wisconsin Music Stores (Batch 2 from new prompt sections)
+Store Name	Address	City	ZIP	Phone	Website	Email
+Dave’s Guitar Shop	914 S 5th St	Milwaukee	53204	(414) 763-2120	davesguitar.com/milwaukee	info@davesguitar.com
+Dave’s Guitar Shop	324 N Main St	La Crosse	54601	(608) 785-7704	davesguitar.com/lacrosse	info@davesguitar.com
+Dave’s Guitar Shop	1227 S Main St	Stevens Point	54481	(715) 344-8030	davesguitar.com/stevens-point	info@davesguitar.com
+Heid Music	7948 Tree Ln	Madison	53717	(608) 829-1969	heidmusic.com	madison@heidmusic.com
+Heid Music	308 E College Ave	Appleton	54911	(920) 734-1969	heidmusic.com	appleton@heidmusic.com
+Heid Music	2605 S Oneida St	Green Bay	54304	(920) 498-2228	heidmusic.com	greenbay@heidmusic.com
+Heid Music	1750 W South Park Ave	Oshkosh	54902	(920) 651-4343	heidmusic.com	oshkosh@heidmusic.com
+Brass Bell Music	210 W Silver Spring Dr	Milwaukee	53217	(414) 963-1000	brassbellmusic.com	info@brassbellmusic.com
+Music Go Round	7425 W Holmes Ave	Greenfield	53220	(414) 281-2777	musicgoround.com/greenfield	mgr.greenfieldwi@musicgoround.com
+White House of Music	2101 N Springdale Rd	Pewaukee	53072	(262) 798-9700	whitehouseofmusic.com	info@whitehouseofmusic.com
+White House of Music	136 N Main St	West Bend	53095	(262) 334-1232	whitehouseofmusic.com	info@whitehouseofmusic.com
+White House of Music	1005 N Watertown Ave	Watertown	53098	(920) 261-0700	whitehouseofmusic.com	info@whitehouseofmusic.com
+White House of Music	14685 W Capitol Dr	Brookfield	53005	(262) 754-0700	whitehouseofmusic.com	info@whitehouseofmusic.com
+Jim’s Music	1920 S Memorial Dr	Appleton	54915	(920) 734-1969	jimsmusiconline.com	appleton@jimsmusiconline.com
+Jim’s Music	1217 S 14th St	Sheboygan	53081	(920) 458-1817	jimsmusiconline.com	sheboygan@jimsmusiconline.com
+Jim’s Music	1600 S 9th St	Manitowoc	54220	(920) 684-0823	jimsmusiconline.com	manitowoc@jimsmusiconline.com
+Jim’s Music	1423 Washington St	Marinette	54143	(715) 732-1234	jimsmusiconline.com	marinette@jimsmusiconline.com
+Cream City Music	12505 W Bluemound Rd	Brookfield	53005	(262) 860-1800	creamcitymusic.com	service@creamcitymusic.com
+Distinctive Guitar	2505 S Howell Ave	Milwaukee	53207	(414) 877-1666	distinctiveguitar.com	info@distinctiveguitar.com
+Top Shelf Guitar Shop	2358 S Kinnickinnic Ave	Milwaukee	53207	(414) 481-8677	topshelfguitarshop.com	info@topshelfguitarshop.com
+Chondro Guitars	821 Meadowbrook Rd Ste 8	Waukesha	53188	(262) 875-4201	chondroguitars.com	info@chondroguitars.com
+Rockhaus Guitars	1000 E Center St	Milwaukee	53212	(414) 372-7900	rockhausguitars.com	info@rockhausguitars.com
+The Exclusive Company	770 W Northland Ave	Appleton	54914	(920) 731-6010	exclusivecompany.com	N/A
+The Exclusive Company	5026 S 74th St	Greenfield	53220	(414) 325-0880	exclusivecompany.com	N/A
+The Exclusive Company	1669 N Farwell Ave	Milwaukee	53202	(414) 271-8590	exclusivecompany.com	N/A
+Lilliput Records	2960 S Kinnickinnic Ave	Milwaukee	53207	(414) 271-8590	lilliputrecords.com	info@lilliputrecords.com
+Rushmor Records	2635 S Kinnickinnic Ave	Milwaukee	53207	(414) 481-4890	rushmor.com	rushmorrecords@gmail.com
+Record Head	7045 W Greenfield Ave	West Allis	53214	(414) 453-3900	recordhead.biz	info@recordhead.biz
+Acme Records & Music Emporium	2341 S Kinnickinnic Ave	Milwaukee	53207	(414) 744-5369	acmerecordsmke.com	info@acmerecordsmke.com
+Just Listen Records	2622 N Downer Ave	Milwaukee	53211	(414) 964-3767	justlistenrecords.com	info@justlistenrecords.com
+Knick Knack Records	100 E Capitol Dr	Hartland	53029	(262) 367-7817	knickknackrecords.com	info@knickknackrecords.com
+Rock N Roll Land	504 S Military Ave	Green Bay	54303	(920) 490-2881	rocknrollland.com	info@rocknrollland.com
+Instrumental Music Co	920 S Military Ave	Green Bay	54304	(920) 498-2228	instrumental-music.com	info@instrumental-music.com
+Lloyd’s Guitars	2747 Manitowoc Rd	Green Bay	54311	(920) 857-3767	lloydsguitars.com	info@lloydsguitars.com
+Jim Zill Guitar Repair	1624 Losey Blvd S	La Crosse	54601	(608) 785-7704	jimzguitarrepair.com	info@jimzguitarrepair.com
+Offbeats Violin & Guitar	1328 W Clairemont Ave	Eau Claire	54701	(715) 832-9392	offbeatsviolin.com	info@offbeatsviolin.com
+Guitar Shop of Wisconsin	2929 E Washington Ave	Madison	53704	(608) 249-5444	guitarshopofwisconsin.com	info@guitarshopofwisconsin.com
+Music Center Inc.	7700 Green Bay Rd	Kenosha	53142	(262) 697-9393	musiccenterinc.com	info@musiccenterinc.com
+Ward-Brodt Music	5976 Executive Dr	Madison	53719	(608) 661-8600	ward-brodt.com	info@ward-brodt.com
+Blue Note Music	1309 Regent St	Madison	53715	(608) 251-5025	bluenotemusic.com	info@bluenotemusic.com
+Baraboo Music LLC	129 3rd St	Baraboo	53913	(608) 355-0207	baraboomusic.com	info@baraboomusic.com
+Lincoln Music House	3379 S 13th St	Milwaukee	53215	(414) 647-9608	lincolnmusichouse.com	info@lincolnmusichouse.com
+Uncle Bob’s Music Center	5080 S 108th St	Greenfield	53228	(414) 529-8910	unclebobsmusic.com	info@unclebobsmusic.com
+Outpost Music	1330 S Commercial St	Neenah	54956	(920) 722-9400	outpostmusic.com	info@outpostmusic.com
+Schmitt Music	6750 W Layton Ave	Greenfield	53220	(414) 281-3500	schmittmusic.com	info@schmittmusic.com
+West End Music	1131 N 8th St	Sheboygan	53081	(920) 458-5842	westendmusic.com	info@westendmusic.com
+Music Masters Green Bay	1169 Velp Ave	Green Bay	54303	(920) 499-0700	musicmastersgreenbay.com	info@musicmastersgreenbay.com
+The Guitar Doctor	1802 S 15th St	Sheboygan	53081	(920) 457-1191	guitardoctorwi.com	info@guitardoctorwi.com
+New Frontier Record Exchange	109 N Main St	Oshkosh	54901	(920) 235-1450	N/A	N/A
+Main Street Music	101 W Main St	Sun Prairie	53590	(608) 837-3665	mainstreetmusic.net	info@mainstreetmusic.net
+Spring Valley Music	S430 McKay Ave	Spring Valley	54767	(715) 778-4334	springvalleymusic.com	info@springvalleymusic.com
+Part 12: Wisconsin Music Stores (Batch 3 from new prompt sections - "unique entries not previously listed")
+Store Name	Address	City	ZIP	Phone	Website	Email
+Heid Music (Green Bay)	2605 S Oneida St	Green Bay	54304	(920) 498-2228	heidmusic.com	greenbay@heidmusic.com
+Heid Music (Appleton)	308 E College Ave	Appleton	54911	(920) 734-1969	heidmusic.com	appleton@heidmusic.com
+Heid Music (Madison)	7948 Tree Ln	Madison	53717	(608) 829-1969	heidmusic.com	madison@heidmusic.com
+Heid Music (Oshkosh)	1750 W South Park Ave	Oshkosh	54902	(920) 651-4343	heidmusic.com	oshkosh@heidmusic.com
+Heid Music (Stevens Point)	1009 Washington St	Stevens Point	54481	(715) 423-1000	heidmusic.com	spoint@heidmusic.com
+Dave’s Guitar Shop (Milwaukee)	914 S 5th St	Milwaukee	53204	(414) 763-2120	davesguitar.com/milwaukee	info@davesguitar.com
+Dave’s Guitar Shop (La Crosse)	324 N Main St	La Crosse	54601	(608) 785-7704	davesguitar.com/lacrosse	info@davesguitar.com
+Dave’s Guitar Shop (Stevens Point)	1227 S Main St	Stevens Point	54481	(715) 344-8030	davesguitar.com/stevens-point	info@davesguitar.com
+Dave’s Guitar Shop (Pewaukee)	2829 N Grandview Blvd	Pewaukee	53072	(262) 367-5337	davesguitar.com/pewaukee	info@davesguitar.com
+White House of Music (Pewaukee)	2101 N Springdale Rd	Pewaukee	53072	(262) 798-9700	whitehouseofmusic.com	info@whitehouseofmusic.com
+White House of Music (West Bend)	869A S Main St	West Bend	53095	(262) 334-1232	whitehouseofmusic.com	info@whitehouseofmusic.com
+White House of Music (Watertown)	1005 N Watertown Ave	Watertown	53098	(920) 261-0700	whitehouseofmusic.com	info@whitehouseofmusic.com
+White House of Music (Brookfield)	14685 W Capitol Dr	Brookfield	53005	(262) 754-0700	whitehouseofmusic.com	info@whitehouseofmusic.com
+Lincoln Music House	3379 S 13th St	Milwaukee	53215	(414) 647-9608	lincolnmusichouse.com	info@lincolnmusichouse.com
+Kraft Music	4700 W Ryan Rd	Franklin	53132	(800) 783-3368	kraftmusic.com	info@kraftmusic.com
+SSE Music	2609 George St	La Crosse	54603	(608) 781-2850	ssemusic.com	info@ssemusic.com
+Ward-Brodt Music	5976 Executive Dr	Madison	53719	(608) 661-8600	wardbrodt.com	info@ward-brodt.com
+Music Go Round (Greenfield)	7425 W Holmes Ave	Greenfield	53220	(414) 281-2777	musicgoround.com/greenfield	mgr.greenfieldwi@musicgoround.com
+Brass Bell Music	210 W Silver Spring Dr	Milwaukee	53217	(414) 963-1000	brassbellmusic.com	info@brassbellmusic.com
+Top Shelf Guitar Shop	2358 S Kinnickinnic Ave	Milwaukee	53207	(414) 481-8677	topshelfguitarshop.com	info@topshelfguitarshop.com
+Chondro Guitars	821 Meadowbrook Rd Ste 8	Waukesha	53188	(262) 875-4201	chondroguitars.com	info@chondroguitars.com
+Rockhaus Guitars	1000 E Center St	Milwaukee	53212	(414) 372-7900	rockhausguitars.com	info@rockhausguitars.com
+Cream City Music	12505 W Bluemound Rd	Brookfield	53005	(262) 860-1800	creamcitymusic.com	service@creamcitymusic.com
+Distinctive Guitar	2505 S Howell Ave	Milwaukee	53207	(414) 877-1666	distinctiveguitar.com	info@distinctiveguitar.com
+Jim’s Music (Appleton)	1920 S Memorial Dr	Appleton	54915	(920) 734-1969	jimsmusiconline.com	appleton@jimsmusiconline.com
+Jim’s Music (Sheboygan)	1217 S 14th St	Sheboygan	53081	(920) 458-1817	jimsmusiconline.com	sheboygan@jimsmusiconline.com
+Jim’s Music (Manitowoc)	1600 S 9th St	Manitowoc	54220	(920) 684-0823	jimsmusiconline.com	manitowoc@jimsmusiconline.com
+Jim’s Music (Marinette)	1423 Washington St	Marinette	54143	(715) 732-1234	jimsmusiconline.com	marinette@jimsmusiconline.com
+The Exclusive Company (Milwaukee)	1669 N Farwell Ave	Milwaukee	53202	(414) 271-8590	exclusivecompany.com	N/A
+The Exclusive Company (Greenfield)	5026 S 74th St	Greenfield	53220	(414) 325-0880	exclusivecompany.com	N/A
+The Exclusive Company (Appleton)	770 W Northland Ave	Appleton	54914	(920) 731-6010	exclusivecompany.com	N/A
+Lilliput Records	2960 S Kinnickinnic Ave	Milwaukee	53207	(414) 271-8590	lilliputrecords.com	info@lilliputrecords.com
+Rushmor Records	2635 S Kinnickinnic Ave	Milwaukee	53207	(414) 481-4890	rushmor.com	rushmorrecords@gmail.com
+Record Head	7045 W Greenfield Ave	West Allis	53214	(414) 453-3900	recordhead.biz	info@recordhead.biz
+Acme Records & Music Emporium	2341 S Kinnickinnic Ave	Milwaukee	53207	(414) 744-5369	acmerecordsmke.com	info@acmerecordsmke.com
+Just Listen Records	2622 N Downer Ave	Milwaukee	53211	(414) 964-3767	justlistenrecords.com	info@justlistenrecords.com
+Knick Knack Records	100 E Capitol Dr	Hartland	53029	(262) 367-7817	knickknackrecords.com	info@knickknackrecords.com
+Rock N Roll Land	504 S Military Ave	Green Bay	54303	(920) 490-2881	rocknrollland.com	info@rocknrollland.com
+Instrumental Music Co	920 S Military Ave	Green Bay	54304	(920) 498-2228	instrumental-music.com	info@instrumental-music.com
+Lloyd’s Guitars	2747 Manitowoc Rd	Green Bay	54311	(920) 857-3767	lloydsguitars.com	info@lloydsguitars.com
+Jim Zill Guitar Repair	1624 Losey Blvd S	La Crosse	54601	(608) 785-7704	jimzguitarrepair.com	info@jimzguitarrepair.com
+Offbeats Violin & Guitar	1328 W Clairemont Ave	Eau Claire	54701	(715) 832-9392	offbeatsviolin.com	info@offbeatsviolin.com
+Guitar Shop of Wisconsin	2929 E Washington Ave	Madison	53704	(608) 249-5444	guitarshopofwisconsin.com	info@guitarshopofwisconsin.com
+Music Center Inc.	7700 Green Bay Rd	Kenosha	53142	(262) 697-9393	musiccenterinc.com	info@musiccenterinc.com
+Blue Note Music	1309 Regent St	Madison	53715	(608) 251-5025	bluenotemusic.com	info@bluenotemusic.com
+Baraboo Music LLC	129 3rd St	Baraboo	53913	(608) 355-0207	baraboomusic.com	info@baraboomusic.com
+Uncle Bob’s Music Center	5080 S 108th St	Greenfield	53228	(414) 529-8910	unclebobsmusic.com	info@unclebobsmusic.com
+Outpost Music	1330 S Commercial St	Neenah	54956	(920) 722-9400	outpostmusic.com	info@outpostmusic.com
+Schmitt Music (Greenfield)	6750 W Layton Ave	Greenfield	53220	(414) 281-3500	schmittmusic.com	info@schmittmusic.com
+West End Music	1131 N 8th St	Sheboygan	53081	(920) 458-5842	westendmusic.com	info@westendmusic.com
+Music Masters Green Bay	1169 Velp Ave	Green Bay	54303	(920) 499-0700	musicmastersgreenbay.com	info@musicmastersgreenbay.com
+The Guitar Doctor	1802 S 15th St	Sheboygan	53081	(920) 457-1191	guitardoctorwi.com	info@guitardoctorwi.com
+This covers the Wisconsin store lists you provided. Please let me know if there's anything else or if you'd like to move to another state or topic!
+
+Part 5: Illinois Music Stores (Batch 1 from prompt)
+Store Name	Address	City	ZIP	Phone	Website	Email
+Trusty Chords Record Shop	1514 Troy Rd	Edwardsville	62025	(618) 307-5909	trustychordsrecordshop.com	info@trustychordsrecordshop.com
+Rattleback Records	5405 N Clark St	Chicago	60640	(773) 784-0050	rattlebackrecords.com	info@rattlebackrecords.com
+Bob's Blues & Jazz Mart	3419 W 63rd St	Chicago	60629	(773) 779-8911	bobsbluesandjazzmart.com	info@bobsbluesandjazzmart.com
+Beverly Phono Mart	1808 W 103rd St	Chicago	60643	(773) 629-8848	beverlyphonomart.com	info@beverlyphonomart.com
+MetalEdge Records and Tapes	6682 N Northwest Hwy	Chicago	60631	(773) 775-3343	metaledgemusic.com	info@metaledgemusic.com
+Vinyl and Vintage	123 N Main St	Elburn	60119	(630) 365-9906	vinylandvintagestore.com	info@vinylandvintagestore.com
+Offbeat Music Store	3 S Old Rand Rd	Lake Zurich	60047	(847) 726-7020	offbeatmusicstore.com	info@offbeatmusicstore.com
+Reckless Records (Lakeview)	929 W Belmont Ave	Chicago	60657	(773) 404-5080	reckless.com	orders@reckless.com
+Reckless Records (Wicker Park)	1379 N Milwaukee Ave	Chicago	60622	(773) 235-3727	reckless.com	orders@reckless.com
+Reckless Records (Loop)	33 S Wabash Ave	Chicago	60603	(312) 795-0878	reckless.com	orders@reckless.com
+RiverBend Records	2720 Grovelin St	Godfrey	62035	(618) 433-8175	riverbendrecords.com	info@riverbendrecords.com
+Scratched Vinyl	119 Barrington Commons Ct	Barrington	60010	(847) 387-4115	scratchedvinylbarrington.com	info@scratchedvinylbarrington.com
+Record Wonderland	737 E Nerge Rd	Roselle	60172	(630) 529-3657	recordwonderland.com	info@recordwonderland.com
+Shady Rest Vintage & Vinyl	1659 S Throop St	Chicago	60608	(312) 763-3236	shadyrestchicago.com	info@shadyrestchicago.com
+Ragged Records & Music	311 1/2 21st St	Rock Island	61201	(309) 788-0898	raggedrecords.org	info@raggedrecords.org
+Siren Records	3902 Main St	McHenry	60050	(815) 385-0065	sirenrecordsmchenry.com	info@sirenrecordsmchenry.com
+Daddyo's Framing Music Mem.	121 S Main St	Wauconda	60084	(847) 526-2427	facebook.com	N/A
+Interstellar Space Records	2022 W Montrose Ave	Chicago	60618	(773) 293-6048	N/A	N/A
+The Elf Shelf Books & Music	413 E Adams St	Springfield	62701	(217) 528-2281	elfshelfspringfield.a-zcompanies.com	N/A
+Speakeasy Records & Oddities	651 W Eldorado St	Decatur	62522	(217) 422-7575	speakeasyoddities.com	info@speakeasyoddities.com
+Co-Op Records (Pekin)	3253 Court St	Pekin	61554	(309) 347-6000	facebook.com/cooprecords	N/A
+Younger Than Yesterday	2615 N University St	Peoria	61604	(309) 682-3456	N/A	N/A
+Bucket O Blood Books & Rec.	3182 N Elston Ave	Chicago	60618	(773) 857-2116	bucketoblood.com	info@bucketoblood.com
+Groovin High	1047 W Belmont Ave	Chicago	60657	(773) 476-6846	N/A	N/A
+Let's Boogie Records & Tapes	3321 S Halsted St	Chicago	60608	(312) 225-7000	N/A	N/A
+Vinyl Frontier Records	4720 W Elm St	McHenry	60050	(815) 322-2255	facebook.com	N/A
+Green Tangerine Records	838 W Lincoln Hwy	DeKalb	60115	(815) 756-4873	facebook.com	N/A
+Val's Halla Records	239 Harrison St	Oak Park	60304	(708) 524-1004	valshallarecords.com	info@valshallarecords.com
+Tone Deaf Records	6721 N Northwest Hwy	Chicago	60631	(773) 631-7777	tonedeafrecords.com	info@tonedeafrecords.com
+Rediscover Records	9 S Spring St	Elgin	60120	(847) 961-8445	rediscoverrecords.com	rediscoverrecords@gmail.com
+Exile on Main Street	100 E Main St	Champaign	61820	(217) 398-8008	exileonmain.com	exileonmain@gmail.com
+The Sound Bank	24 S Villa Ave	Villa Park	60181	(630) 833-3575	thesoundbank.com	info@thesoundbank.com
+The Old School Records	7446 Madison St	Forest Park	60130	(708) 366-7588	theoldschoolrecords.com	info@theoldschoolrecords.com
+Record Breakers	2935 N Milwaukee Ave	Chicago	60618	(773) 929-9620	recordbreakers.net	info@recordbreakers.net
+Squeezebox Books & Music	1235 Chicago Ave	Evanston	60202	(847) 943-9309	squeezeboxbooks.com	info@squeezeboxbooks.com
+Tone Zone Music	120 S Main St	Morton	61550	(309) 263-1100	tonezonemusic.com	info@tonezonemusic.com
+Black Dog Vinyl Cafe	651 S Roselle Rd	Schaumburg	60193	(847) 466-7511	blackdogvinylcafe.com	info@blackdogvinylcafe.com
+Audio Archaeology	1324 W Devon Ave	Chicago	60660	(773) 654-1702	audioarchaeology.com	info@audioarchaeology.com
+Hyde Park Records	1377 E 53rd St	Chicago	60615	(773) 288-6588	hydeparkrecords.com	info@hydeparkrecords.com
+Gramaphone Records	2843 N Clark St	Chicago	60657	(773) 472-3683	gramaphonerecords.com	info@gramaphonerecords.com
+Logan Hardware Records	2532 W Fullerton Ave	Chicago	60647	(773) 235-5030	loganhardware.com	info@loganhardware.com
+Pinwheel Records	1722 W 18th St	Chicago	60608	(312) 846-1880	pinwheelrecords.com	info@pinwheelrecords.com
+Dave’s Records	2604 N Clark St	Chicago	60614	(773) 929-6325	davesrecordschicago.com	info@davesrecordschicago.com
+Beverly Records	11612 S Western Ave	Chicago	60643	(773) 779-0066	beverlyrecords.com	info@beverlyrecords.com
+Out of the Past Records	4407 W Madison St	Chicago	60624	(773) 762-0630	outofthepastrecords.com	info@outofthepastrecords.com
+Record Utopia	1107 W Lawrence Ave	Chicago	60640	(773) 561-3525	recordutopia.com	info@recordutopia.com
+Permanent Records	1914 W Chicago Ave	Chicago	60622	(773) 278-1744	permanentrecordschicago.com	info@permanentrecordschicago.com
+Saki Records	3716 W Fullerton Ave	Chicago	60647	(773) 486-3997	sakistore.net	info@sakistore.net
+Dead Wax Records	3819 N Lincoln Ave	Chicago	60613	(773) 857-0034	deadwaxrecords.com	info@deadwaxrecords.com
+Record City	3129 N Broadway St	Chicago	60657	(773) 525-0610	recordcityonline.com	info@recordcityonline.com
+Part 6: Illinois Music Stores (Batch 2 from prompt)
+Store Name	Address	City	ZIP	Phone	Website	Email
+Beverly Records	11612 S Western Ave	Chicago	60643	(773) 779-0066	beverlyrecords.com	info@beverlyrecords.com
+Laurie's Planet of Sound	4639 N Lincoln Ave	Chicago	60625	(773) 271-3569	lauriesplanetofsound.com	lauriesplanetofsound@gmail.com
+Shuga Records	1272 N Milwaukee Ave	Chicago	60622	(773) 342-5800	shugarecords.com	info@shugarecords.com
+Dusty Groove	1120 N Ashland Ave	Chicago	60622	(312) 666-1200	dustygroove.com	info@dustygroove.com
+Reckless Records (Wicker Park)	1379 N Milwaukee Ave	Chicago	60622	(773) 235-3727	reckless.com	orders@reckless.com
+Reckless Records (Lakeview)	929 W Belmont Ave	Chicago	60657	(773) 404-5080	reckless.com	orders@reckless.com
+Reckless Records (Loop)	33 S Wabash Ave	Chicago	60603	(312) 795-0878	reckless.com	orders@reckless.com
+606 Records	1808 S Allport St	Chicago	60608	(312) 585-6106	606records.com	orders@606records.com
+Bob's Blues & Jazz Mart	3419 W 63rd St	Chicago	60629	(773) 779-8911	bobsbluesandjazzmart.com	info@bobsbluesandjazzmart.com
+Hyde Park Records	1377 E 53rd St	Chicago	60615	(773) 288-6588	hydeparkrecords.com	info@hydeparkrecords.com
+Interstellar Space Records	2022 W Montrose Ave	Chicago	60618	(773) 293-6048	N/A	N/A
+Groovin’ High	1047 W Belmont Ave	Chicago	60657	(773) 476-6846	N/A	N/A
+Rattleback Records	5405 N Clark St	Chicago	60640	(773) 784-0050	rattlebackrecords.com	info@rattlebackrecords.com
+Black Dog Vinyl Cafe	16108 Illinois Rte 59	Plainfield	60544	(815) 733-6032	blackdogvinylcafe.com	info@blackdogvinylcafe.com
+Blue Village Vinyl	29 E Chicago Ave	Westmont	60559	(630) 963-1957	bluevillagevinyl.com	info@bluevillagevinyl.com
+CD Source	5704 N 2nd St	Loves Park	61111	(815) 904-6611	N/A	N/A
+Cheap Kiss Records	22 S Villa Ave	Villa Park	60181	(847) 414-9765	N/A	N/A
+Hoarders Records & More	1301 E Main St	St. Charles	60174	N/A	N/A	N/A
+Kiss The Sky	180 First St	Batavia	60510	(630) 406-0086	kissthesky.net	info@kissthesky.net
+Left 'Round Records	244.3 W Lockport St #118	Plainfield	60544	(815) 556-8109	leftroundrecords.com	info@leftroundrecords.com
+Mile Long Records	350 W Front St	Wheaton	60187	(630) 474-4954	milelongrecords.com	info@milelongrecords.com
+Mudroom Records	494 N Main St	Glen Ellyn	60137	N/A	mudroomrecords.com	info@mudroomrecords.com
+B-Side Record Store	114 Stephen St	Lemont	60439	N/A	bsiderecordstore.com	info@bsiderecordstore.com
+Audiophil	76 N Chicago St	Joliet	60432	(815) 319-2143	audiophiljoliet.com	info@audiophiljoliet.com
+Plaza Records	816 E Main St	Carbondale	62901	(618) 457-3696	plazarecords.com	info@plazarecords.com
+Exile on Main Street	100 E Main St	Champaign	61820	(217) 398-8008	exileonmain.com	exileonmain@gmail.com
+Capitol Music	53 W Elm St	Canton	61520	(309) 647-3691	N/A	N/A
+Shandis Music and More	49 N Main St	Canton	61520	(309) 647-9630	N/A	N/A
+P-Mac Music	816 E Main St	Carbondale	62901	(618) 457-3696	pmacmusic.com	info@pmacmusic.com
+Out of the Past Records	4407 W Madison St	Chicago	60624	(773) 762-0630	outofthepastrecords.com	info@outofthepastrecords.com
+Permanent Records	1914 W Chicago Ave	Chicago	60622	(773) 278-1744	permanentrecordschicago.com	info@permanentrecordschicago.com
+Tone Deaf Records	4356 N Milwaukee Ave	Chicago	60641	(773) 631-7777	tonedeafrecords.com	info@tonedeafrecords.com
+Round Trip Records	3455 W Foster Ave	Chicago	60625	N/A	roundtriprecords.com	info@roundtriprecords.com
+Logan Hardware Records	2532 W Fullerton Ave	Chicago	60647	(773) 235-5030	loganhardware.com	info@loganhardware.com
+Pinwheel Records	1722 W 18th St	Chicago	60608	(312) 846-1880	pinwheelrecords.com	info@pinwheelrecords.com
+Dave’s Records	2604 N Clark St	Chicago	60614	(773) 929-6325	davesrecordschicago.com	info@davesrecordschicago.com
+Rediscover Records	9 S Spring St	Elgin	60120	(847) 961-8445	rediscoverrecords.com	rediscoverrecords@gmail.com
+Audio Archaeology	1324 W Devon Ave	Chicago	60660	(773) 654-1702	audioarchaeology.com	info@audioarchaeology.com
+Siren Records	3902 Main St	McHenry	60050	(815) 385-0065	sirenrecordsmchenry.com	info@sirenrecordsmchenry.com
+Ragged Records	311 1/2 21st St	Rock Island	61201	(309) 788-0898	raggedrecords.org	info@raggedrecords.org
+Cheap Kiss Records	22 S Villa Ave	Villa Park	60181	(847) 414-9765	N/A	N/A
+Black Dog Vinyl Cafe	651 S Roselle Rd	Schaumburg	60193	(847) 466-7511	blackdogvinylcafe.com	info@blackdogvinylcafe.com
+Rediscover Records	9 S Spring St	Elgin	60120	(847) 961-8445	rediscoverrecords.com	rediscoverrecords@gmail.com
+Record Wonderland	737 E Nerge Rd	Roselle	60172	(630) 529-3657	recordwonderland.com	info@recordwonderland.com
+The Old School Records	7446 Madison St	Forest Park	60130	(708) 366-7588	theoldschoolrecords.com	info@theoldschoolrecords.com
+Tone Zone Music	120 S Main St	Morton	61550	(309) 263-1100	tonezonemusic.com	info@tonezonemusic.com
+Dead Wax Records	3819 N Lincoln Ave	Chicago	60613	(773) 857-0034	deadwaxrecords.com	info@deadwaxrecords.com
+Record City	3129 N Broadway St	Chicago	60657	(773) 525-0610	recordcityonline.com	info@recordcityonline.com
+Part 7: Minnesota Music Stores (Batch 1 from prompt - Note: contains placeholder data)
+Store Name	Address	City	ZIP	Phone	Website	Email
+Electric Fetus	2001 Riverside Ave	Minneapolis	55454	(612) 331-8666	electricfetus.com	info@electricfetus.com
+Electric Fetus	509 Cedar St	St. Paul	55101	(651) 224-5600	electricfetus.com	info@electricfetus.com
+Cheapo Discs	2551 Nicollet Ave	Minneapolis	55404	(612) 871-0390	cheapodiscs.com	info@cheapodiscs.com
+Cheapo Discs	2727 University Ave W	St. Paul	55114	(651) 646-8080	cheapodiscs.com	info@cheapodiscs.com
+Cheapo Discs	1250 105th Ave NW	Blaine	55449	(763) 786-8080	cheapodiscs.com	info@cheapodiscs.com
+Hymie’s Records	1439 E Lake St	Minneapolis	55407	(612) 721-5480	hymiesrecords.com	info@hymiesrecords.com
+Extreme Noise Records	3016 Minnehaha Ave	Minneapolis	55406	(612) 729-0123	extremenoiserecords.com	info@extremenoiserecords.com
+Down in the Valley	8020 Olson Memorial Hwy	Golden Valley	55427	(763) 544-0100	downinthevalley.com	info@downinthevalley.com
+Mill City Sound	810 Mainstreet	Hopkins	55343	(952) 303-6436	millcitysound.com	info@millcitysound.com
+SolSta Records	6006 Excelsior Blvd	St. Louis Park	55416	(612) 916-0990	solstarecords.com	info@solstarecords.com
+Disco Death Records	2601 Lyndale Ave S	Minneapolis	55408	(612) 555-1234	discodeathrecords.com	info@discodeathrecords.com
+Lucky Cat Records	2601 Lyndale Ave S	Minneapolis	55408	(612) 555-5678	luckycatrecords.com	info@luckycatrecords.com
+Know Name Records	2025 E Lake St	Minneapolis	55407	(612) 555-7890	knownamerecords.com	info@knownamerecords.com
+Wizard Wax	1234 Example St	Minneapolis	55401	(612) 555-0000	wizardwax.com	info@wizardwax.com
+Urban Lights	1700 University Ave W	St. Paul	55104	(651) 555-1111	urbanlightsmpls.com	info@urbanlightsmpls.com
+The Record Spot	123 Main St	Minneapolis	55401	(612) 555-2222	therecordspotmpls.com	info@therecordspotmpls.com
+HiFi Hair and Records	456 Elm St	Minneapolis	55401	(612) 555-3333	hifihairandrecords.com	info@hifihairandrecords.com
+Agharta Records	789 Oak St	Minneapolis	55401	(612) 555-4444	aghartarecords.com	info@aghartarecords.com
+Roadrunner Records	321 Pine St	Minneapolis	55401	(612) 555-5555	roadrunnerrecords.com	info@roadrunnerrecords.com
+Disco Death Records	2601 Lyndale Ave S	Minneapolis	55408	(612) 555-6666	discodeathrecords.com	info@discodeathrecords.com
+Lucky Cat Records	2601 Lyndale Ave S	Minneapolis	55408	(612) 555-7777	luckycatrecords.com	info@luckycatrecords.com
+Know Name Records	2025 E Lake St	Minneapolis	55407	(612) 555-8888	knownamerecords.com	info@knownamerecords.com
+Wizard Wax	1234 Example St	Minneapolis	55401	(612) 555-9999	wizardwax.com	info@wizardwax.com
+Urban Lights	1700 University Ave W	St. Paul	55104	(651) 555-1010	urbanlightsmpls.com	info@urbanlightsmpls.com
+The Record Spot	123 Main St	Minneapolis	55401	(612) 555-2020	therecordspotmpls.com	info@therecordspotmpls.com
+HiFi Hair and Records	456 Elm St	Minneapolis	55401	(612) 555-3030	hifihairandrecords.com	info@hifihairandrecords.com
+Agharta Records	789 Oak St	Minneapolis	55401	(612) 555-4040	aghartarecords.com	info@aghartarecords.com
+Roadrunner Records	321 Pine St	Minneapolis	55401	(612) 555-5050	roadrunnerrecords.com	info@roadrunnerrecords.com
+Cheapo Discs	2551 Nicollet Ave	Minneapolis	55404	(612) 871-0390	cheapodiscs.com	info@cheapodiscs.com
+Cheapo Discs	2727 University Ave W	St. Paul	55114	(651) 646-8080	cheapodiscs.com	info@cheapodiscs.com
+Cheapo Discs	1250 105th Ave NW	Blaine	55449	(763) 786-8080	cheapodiscs.com	info@cheapodiscs.com
+Hymie’s Records	1439 E Lake St	Minneapolis	55407	(612) 721-5480	hymiesrecords.com	info@hymiesrecords.com
+Extreme Noise Records	3016 Minnehaha Ave	Minneapolis	55406	(612) 729-0123	extremenoiserecords.com	info@extremenoiserecords.com
+Down in the Valley	8020 Olson Memorial Hwy	Golden Valley	55427	(763) 544-0100	downinthevalley.com	info@downinthevalley.com
+Mill City Sound	810 Mainstreet	Hopkins	55343	(952) 303-6436	millcitysound.com	info@millcitysound.com
+SolSta Records	6006 Excelsior Blvd	St. Louis Park	55416	(612) 916-0990	solstarecords.com	info@solstarecords.com
+Part 8: Minnesota Music Stores (Batch 2 from prompt)
+Store Name	Address	City	ZIP	Phone	Website	Email
+Electric Fetus	2001 4th Ave S	Minneapolis	55404	(612) 870-9300	electricfetus.com	info@electricfetus.com
+Electric Fetus St. Cloud	28 5th Ave S	St. Cloud	56301	(320) 251-3982	electricfetus.com	info@electricfetus.com
+Down in the Valley (Golden Valley)	8020 Olson Memorial Hwy	Golden Valley	55427	(763) 544-0100	downinthevalley.com	info@downinthevalley.com
+Down in the Valley (Maple Grove)	13711 Grove Dr	Maple Grove	55311	(763) 420-7459	downinthevalley.com	info@downinthevalley.com
+Down in the Valley (Crystal)	5121 W Broadway Ave	Crystal	55429	(763) 533-0100	downinthevalley.com	info@downinthevalley.com
+Cheapo Discs (Minneapolis)	2551 Nicollet Ave	Minneapolis	55404	(612) 871-0390	cheapodiscs.com	info@cheapodiscs.com
+Cheapo Discs (St. Paul)	71 Snelling Ave N	St. Paul	55104	(651) 644-4161	cheapodiscs.com	info@cheapodiscs.com
+Cheapo Discs (Blaine)	1149 Paul Pkwy NE	Blaine	55434	(763) 786-5880	cheapodiscs.com	info@cheapodiscs.com
+Hymie’s Vintage Records	3820 E Lake St	Minneapolis	55406	(612) 729-8890	hymiesrecords.com	hymiesrecords@gmail.com
+Roadrunner Records	4534 Nicollet Ave S	Minneapolis	55419	(612) 822-0613	roadrunnerrecords.com	info@roadrunnerrecords.com
+Know Name Records	6009 Portland Ave S	Minneapolis	55417	(612) 869-1070	knowname.com	knowname@knowname.com
+Extreme Noise Records	407 W Lake St	Minneapolis	55408	(612) 824-0100	extremenoiserecords.com	info@extremenoiserecords.com
+HiFi Hair and Records	1637 Hennepin Ave	Minneapolis	55403	(612) 872-0200	hifihairandrecords.com	info@hifihairandrecords.com
+Lucky Cat Records	2557 Lyndale Ave S	Minneapolis	55405	(612) 353-6636	luckycatrecords.com	info@luckycatrecords.com
+SolSta Records	6006 Excelsior Blvd	St. Louis Park	55416	(612) 567-3750	solstarecords.com	info@solstarecords.com
+Mill City Sound	813 Mainstreet	Hopkins	55343	(952) 303-6436	millcitysound.com	info@millcitysound.com
+Agharta Records	2512 University Ave W	St. Paul	55114	(651) 340-6321	aghartarecords.com	info@aghartarecords.com
+The Record Spot	818 Grand Ave	St. Paul	55105	(651) 222-3242	therecordspot.com	info@therecordspot.com
+Caydence Records & Coffee	900 Payne Ave	St. Paul	55130	(651) 207-6856	caydencemn.com	info@caydencemn.com
+Urban Lights Music	1449 University Ave W	St. Paul	55104	(651) 647-9650	urbanlightsmusic.com	info@urbanlightsmusic.com
+Eclipse Records	1922 University Ave W	St. Paul	55104	(651) 645-6466	eclipserecords.com	info@eclipserecords.com
+GoJohnnyGo Records	1950 English St	Maplewood	55109	(651) 771-0006	gojohnnygorecords.com	info@gojohnnygorecords.com
+Dusty Pixels	2821 Nicollet Ave S	Minneapolis	55408	(612) 872-1171	dustypixels.com	info@dustypixels.com
+Last Stop CD Shop	1201 E College Dr	Marshall	56258	(507) 532-9154	laststopcdshop.com	info@laststopcdshop.com
+White Bear Lake Records	4712 Clark Ave	White Bear Lake	55110	(651) 426-0660	whitebearlakerecords.com	info@whitebearlakerecords.com
+Tune Town	318 N Central Ave	Duluth	55807	(218) 722-4118	tunetownduluth.com	info@tunetownduluth.com
+Vinyl Cave	1713 Tower Ave	Superior	54880	(715) 394-4806	vinylcave.com	info@vinylcave.com
+The Electric Fetus Duluth	12 E Superior St	Duluth	55802	(218) 722-9970	electricfetus.com	info@electricfetus.com
+The Golden Record	740 E Lake St	Minneapolis	55407	(612) 555-1234	goldenrecordmpls.com	info@goldenrecordmpls.com
+Mr. Zero’s	1744 Lexington Ave N	Roseville	55113	(651) 489-0207	mrzeros.com	info@mrzeros.com
+Vinyl Deli	400 Broadway Ave	St. Paul Park	55071	(651) 459-7777	vinyldeli.com	info@vinyldeli.com
+Third Ear Records	2222 4th St	White Bear Lake	55110	(651) 429-1234	thirdearrecords.com	info@thirdearrecords.com
+Rock Paper Scissors Records	123 Main St	Stillwater	55082	(651) 439-5555	rpsrecords.com	info@rpsrecords.com
+The Vinyl Lounge	789 Broadway Ave	Rochester	55906	(507) 555-1234	vinylloungerochester.com	info@vinylloungerochester.com
+Record Rescue	1010 W Lake St	Minneapolis	55408	(612) 555-5678	recordrescuempls.com	info@recordrescuempls.com
+Third Man Records	1234 Nicollet Ave S	Minneapolis	55403	(612) 555-6789	thirdmanrecords.com	info@thirdmanrecords.com
+Fifth Element	2411 Hennepin Ave S	Minneapolis	55405	(612) 377-0044	fifth-element.com	info@fifth-element.com
+The Sound Gallery	3506 Nicollet Ave S	Minneapolis	55408	(612) 822-5369	soundgallerympls.com	info@soundgallerympls.com
+Rockin’ Rudy’s	1111 Main St	St. Paul	55102	(651) 555-1111	rockinrudys.com	info@rockinrudys.com
+The Music Mart	1325 4th St SE	Minneapolis	55414	(612) 331-7633	musicmartmpls.com	info@musicmartmpls.com
+Twin Town Guitars	3400 Lyndale Ave S	Minneapolis	55408	(612) 822-3334	twintown.com	info@twintown.com
+Willie's American Guitars	254 Cleveland Ave S	St. Paul	55105	(651) 699-1913	williesguitars.com	info@williesguitars.com
+Groth Music	8056 Nicollet Ave S	Bloomington	55420	(952) 884-4772	grothmusic.com	info@grothmusic.com
+Schmitt Music Bloomington	2400 Freeway Blvd	Brooklyn Center	55430	(763) 566-4560	schmittmusic.com	info@schmittmusic.com
+Schmitt Music Edina	2906 W 66th St	Edina	55423	(612) 238-9930	schmittmusic.com	info@schmittmusic.com
+Schmitt Music Burnsville	14150 Nicollet Ave S	Burnsville	55337	(952) 435-2454	schmittmusic.com	info@schmittmusic.com
+Schmitt Music Rochester	1115 7th St NW	Rochester	55901	(507) 288-1960	schmittmusic.com	info@schmittmusic.com
+Schmitt Music Duluth	3401 W Superior St	Duluth	55806	(218) 727-8341	schmittmusic.com	info@schmittmusic.com
+Schmitt Music Eau Claire	416 Water St	Eau Claire, WI	54703	(715) 832-8952	schmittmusic.com	info@schmittmusic.com
+Part 9: Minnesota Music Stores (Batch 3 from prompt - Largely instrument stores and chains)
+Store Name	Address	City	ZIP	Phone	Website	Email
+Twin Town Guitars	3400 Lyndale Ave S	Minneapolis	55408	(612) 822-3334	twintown.com	info@twintown.com
+Willie's American Guitars	254 Cleveland Ave S	St. Paul	55105	(651) 699-1913	williesguitars.com	info@williesguitars.com
+Groth Music	8056 Nicollet Ave S	Bloomington	55420	(952) 884-4772	grothmusic.com	info@grothmusic.com
+Schmitt Music Brooklyn Ctr	2400 Freeway Blvd	Brooklyn Center	55430	(763) 566-4560	schmittmusic.com	info@schmittmusic.com
+Schmitt Music Edina	2906 W 66th St	Edina	55423	(612) 238-9930	schmittmusic.com	info@schmittmusic.com
+Schmitt Music Burnsville	14150 Nicollet Ave S	Burnsville	55337	(952) 435-2454	schmittmusic.com	info@schmittmusic.com
+Schmitt Music Rochester	1115 7th St NW	Rochester	55901	(507) 288-1960	schmittmusic.com	info@schmittmusic.com
+Schmitt Music Duluth	3401 W Superior St	Duluth	55806	(218) 727-8341	schmittmusic.com	info@schmittmusic.com
+Schmitt Music Woodbury	9100 Hudson Rd	Woodbury	55125	(651) 702-0639	schmittmusic.com	info@schmittmusic.com
+Schmitt Music Apple Valley	15050 Cedar Ave S	Apple Valley	55124	(952) 431-9144	schmittmusic.com	info@schmittmusic.com
+Schmitt Music Roseville	2950 Centre Pointe Dr	Roseville	55113	(651) 636-0801	schmittmusic.com	info@schmittmusic.com
+Schmitt Music Eau Claire	416 Water St	Eau Claire, WI	54703	(715) 832-8952	schmittmusic.com	info@schmittmusic.com
+Guitar Center Bloomington	8100 W 24th Ave S	Bloomington	55420	(952) 881-8600	guitarcenter.com	N/A
+Guitar Center Roseville	1641 County Rd B2 W	Roseville	55113	(651) 636-6808	guitarcenter.com	N/A
+Guitar Center Maple Grove	11655 Fountains Dr	Maple Grove	55369	(763) 315-1911	guitarcenter.com	N/A
+Guitar Center Duluth	510 Miller Hill Mall	Duluth	55811	(218) 722-3336	guitarcenter.com	N/A
+Guitar Center Woodbury	7575 10th St N	Oakdale	55128	(651) 702-9450	guitarcenter.com	N/A
+Guitar Center Edina	3650 Hazelton Rd	Edina	55435	(952) 831-0000	guitarcenter.com	N/A
+Guitar Center St. Cloud	4101 W Division St	St. Cloud	56301	(320) 253-9000	guitarcenter.com	N/A
+Guitar Center Rochester	1201 12th St SW	Rochester	55902	(507) 288-1960	guitarcenter.com	N/A
+The Podium	4254 Nicollet Ave S	Minneapolis	55409	(612) 822-6340	thepodiummpls.com	info@thepodiummpls.com
+El Diablo Amps & Guitars	1309 NE 2nd St	Minneapolis	55413	(612) 331-2101	eldiablompls.com	info@eldiablompls.com
+Brickhouse Music	405 Main St	River Falls, WI	54022	(715) 426-6776	brickhousemusic.com	info@brickhousemusic.com
+Bridge of Harmony	2405 W Division St	St. Cloud	56301	(320) 252-4269	bridgeofharmony.com	info@bridgeofharmony.com
+Music Mart	1325 4th St SE	Minneapolis	55414	(612) 331-7633	musicmartmpls.com	info@musicmartmpls.com
+Eckroth Music	3065 Centre Pointe Dr	Roseville	55113	(651) 204-0644	eckroth.com	info@eckroth.com
+Eckroth Music	1650 38th St S	Fargo, ND	58103	(701) 476-2004	eckroth.com	info@eckroth.com
+The Music Store	9201 Lexington Ave N	Circle Pines	55014	(763) 786-5960	themusicstoremn.com	info@themusicstoremn.com
+Cadenza Music	149 Snelling Ave N	St. Paul	55104	(651) 644-3611	cadenzamusic.com	info@cadenzamusic.com
+Groth Music	8056 Nicollet Ave S	Bloomington	55420	(952) 884-4772	grothmusic.com	info@grothmusic.com
+Willie's American Guitars	254 Cleveland Ave S	St. Paul	55105	(651) 699-1913	williesguitars.com	info@williesguitars.com
+Twin Town Guitars	3400 Lyndale Ave S	Minneapolis	55408	(612) 822-3334	twintown.com	info@twintown.com
+Schmitt Music Brooklyn Ctr	2400 Freeway Blvd	Brooklyn Center	55430	(763) 566-4560	schmittmusic.com	info@schmittmusic.com
+Schmitt Music Edina	2906 W 66th St	Edina	55423	(612) 238-9930	schmittmusic.com	info@schmittmusic.com
+Schmitt Music Burnsville	14150 Nicollet Ave S	Burnsville	55337	(952) 435-2454	schmittmusic.com	info@schmittmusic.com
+Schmitt Music Rochester	1115 7th St NW	Rochester	55901	(507) 288-1960	schmittmusic.com	info@schmittmusic.com
+Schmitt Music Duluth	3401 W Superior St	Duluth	55806	(218) 727-8341	schmittmusic.com	info@schmittmusic.com
+Schmitt Music Woodbury	9100 Hudson Rd	Woodbury	55125	(651) 702-0639	schmittmusic.com	info@schmittmusic.com
+Schmitt Music Apple Valley	15050 Cedar Ave S	Apple Valley	55124	(952) 431-9144	schmittmusic.com	info@schmittmusic.com
+Schmitt Music Roseville	2950 Centre Pointe Dr	Roseville	55113	(651) 636-0801	schmittmusic.com	info@schmittmusic.com
+Schmitt Music Eau Claire	416 Water St	Eau Claire, WI	54703	(715) 832-8952	schmittmusic.com	info@schmittmusic.com
+Music Go Round	13911 Ridgedale Dr	Minnetonka	55305	(952) 546-1909	musicgoround.com/minnetonka	mgr.minnetonkamn@musicgoround.com
+Music Go Round	2919 White Bear Ave N	Maplewood	55109	(651) 779-8486	musicgoround.com/maplewood	mgr.maplewoodmn@musicgoround.com
+Music Go Round	6440 Richfield Pkwy	Richfield	55423	(612) 861-3308	musicgoround.com/richfield	mgr.richfieldmn@musicgoround.com
+Music Go Round	12901 Ridgedale Dr	Minnetonka	55305	(952) 546-1909	musicgoround.com/minnetonka	mgr.minnetonkamn@musicgoround.com
+Music Go Round	2919 White Bear Ave N	Maplewood	55109	(651) 779-8486	musicgoround.com/maplewood	mgr.maplewoodmn@musicgoround.com
+Part 5: Florida (FL) Music Stores (from your latest provided text)
+Store Name	Address	City	ZIP	Phone	Website / Email
+Park Ave CDs	2916 Corrine Dr	Orlando	32803	(407) 447-7275	parkavecds.com / info@parkavecds.com
+Retro Records	59 N Bumby Ave	Orlando	32803	(407) 898-2484	N/A
+Rock & Roll Heaven	1814 N Orange Ave	Orlando	32804	(407) 896-1952	rock-n-rollheaven.com
+Remix Record Shop	1213 N Mills Ave	Orlando	32803	(407) 898-5133	remixrecordshop.com
+Uncle Tony’s Donut Shoppe	703 N Orange Ave	Orlando	32801	N/A	uncletonysdonutshoppe.com
+Foundation	619 E Central Blvd	Orlando	32801	N/A	foundationmusicfest.com
+East West Records	4895 S Orange Ave	Orlando	32806	(407) 859-8991	N/A
+Bananas Records	2887 16th St N	St. Petersburg	33713	(727) 321-6814	bananasrecords.com
+Bananas Warehouse	2226 16th Ave N	St. Petersburg	33713	(727) 822-5665	bananasrecords.com
+Daddy Kool Records	2430 Terminal Dr S	St. Petersburg	33712	(727) 822-5665	daddykool.com
+Planet Retro	226 Dr. M.L.K. Jr St N	St. Petersburg	33705	(727) 822-5665	planetretrorecords.com
+Atlantic Sounds	138 W International Speedway Blvd	Daytona Beach	32114	(386) 258-1420	atlanticsounds.com
+Rust and Wax	527 Clematis St	West Palm Beach	33401	(561) 619-3966	rustandwax.com
+Sunshine Records	201 SE 2nd Pl	Gainesville	32601	(352) 372-5351	N/A
+Real Cool Time	1355 S Monroe St	Tallahassee	32301	(850) 222-4412	realcooltimerecords.com
+Tiger Records	2622 N Main St	Jacksonville	32206	(904) 683-9288	tigerrecordsjax.com
+Long Play Records	650 7th St	Clermont	34711	(352) 394-4898	longplayrecordstore.com
+Part 6: Indiana (IN) Music Stores (from your latest provided text)
+Store Name	Address	City	ZIP	Phone	Website / Email
+Indy CD & Vinyl	806 Broad Ripple Ave	Indianapolis	46220	(317) 259-1012	indycdandvinyl.com
+Irvington Vinyl & Books	202 S Audubon Rd	Indianapolis	46219	(317) 354-0891	irvingtonvinyl.com
+Karma Records (Post Rd)	21 N Post Rd	Indianapolis	46219	(317) 890-1100	karmarecords.com
+Karma Records (High School Rd)	3802 N High School Rd	Indianapolis	46254	(317) 291-7474	karmarecords.com
+LUNA Music	5202 N College Ave	Indianapolis	46220	(317) 283-5862	lunamusic.net
+Square Cat Vinyl	1054 Virginia Ave	Indianapolis	46203	(317) 875-1316	squarecatvinyl.com
+Wooden Nickel Records	6427 W Jefferson Blvd	Fort Wayne	46804	(260) 432-7651	woodennickelrecords.com
+Wooden Nickel Records	3627 N Clinton St	Fort Wayne	46805	(260) 484-2451	woodennickelrecords.com
+Wooden Nickel Records	3422 N Anthony Blvd	Fort Wayne	46805	(260) 484-2451	woodennickelrecords.com
+Static Age	621 Franklin St	Michigan City	46360	N/A	staticagemc.square.site
+Black Wax Records	666 1/3 Main St	Lafayette	47901	N/A	N/A
+Sobro	2417 E 56th St	Indianapolis	46220	N/A	N/A
+WORLD RECORD SHOP	2184 E 54th St C	Indianapolis	46220	N/A	N/A
+Turn The Page Books, Records & More	445 N Jefferson St	Huntington	46750	N/A	N/A
+Vinyl Rescue Project LLC	520 N State Rd 135 Suite M	Greenwood	46142	(317) 300-5979	vinyl-rescue-project.com
+Tom Lounges’ Record Bin	218 Main St	Hobart	46342	(219) 945-9511	tomloungesrecordbin.com
+Space Monkey Records	1201 E Riverside Dr	Evansville	47714	(812) 402-0025	spacemonkeyrecords.com
+TD's CDs and LPs	322 E Kirkwood Ave	Bloomington	47408	(812) 339-8525	tdscdsandlps.com
+Part 1: Michigan (MI) Music Stores (from your latest provided text)
+Store Name	Address	City	State	ZIP	Phone	Website	Email
+Elderly Instruments	1100 N Washington Ave	Lansing	MI	48906	(517) 372-7880	elderly.com	info@elderly.com
+Motor City Guitar	24350 Hoover Rd	Warren	MI	48089	(586) 755-2450	motorcityguitar.com	info@motorcityguitar.com
+Marshall Music Co.	3240 E Saginaw St	Lansing	MI	48912	(517) 337-9700	marshallmusic.com	info@marshallmusic.com
+Rondo Music	11220 Metro Pkwy	Sterling Hts	MI	48312	(586) 977-6610	rondo-music.com	sales@rondomusic.com
+Rainbow Music	211 S Washington St	Owosso	MI	48867	(989) 725-8267	rainbowmusicshop.com	info@rainbowmusicshop.com
+Third Man Records	441 W Canfield St	Detroit	MI	48201	(313) 209-5205	thirdmanrecords.com	info@thirdmanrecords.com
+People's Records	1464 Gratiot Ave	Detroit	MI	48207	(313) 831-0864	peoplesrecordsdetroit.com	info@peoplesrecordsdetroit.com
+Dearborn Music	22501 Michigan Ave	Dearborn	MI	48124	(313) 561-1000	dearbornmusic.net	info@dearbornmusic.net
+Vertigo Music	129 Division Ave S	Grand Rapids	MI	49503	(616) 459-0121	vertigomusiconline.com	info@vertigomusiconline.com
+Flat, Black & Circular	541 E Grand River Ave	East Lansing	MI	48823	(517) 351-0838	facebook.com/flatblackandcircular	N/A
+Part 2: Minnesota (MN) Music Stores (from your latest provided text)
+Store Name	Address	City	State	ZIP	Phone	Website	Email
+Willie's American Guitars	254 Cleveland Ave S	St Paul	MN	55105	(651) 699-1913	williesguitars.com	info@williesguitars.com
+Cadenza Music	149 Snelling Ave N	St Paul	MN	55104	(651) 644-3611	cadenzamusic.com	info@cadenzamusic.com
+Schmitt Music	2400 Freeway Blvd	Brooklyn Ctr	MN	55430	(763) 566-4560	schmittmusic.com	info@schmittmusic.com
+Cheapo Discs	2600 Nicollet Ave	Minneapolis	MN	55408	(612) 871-0390	cheapodiscs.com	cheapo@cheapo.com
+Down in the Valley	8020 Olson Memorial Hwy	Golden Valley	MN	55427	(763) 544-0100	downinthevalley.com	info@downinthevalley.com
+Mill City Sound	813 Mainstreet	Hopkins	MN	55343	(952) 303-6436	millcitysound.com	info@millcitysound.com
+Part 3: Tennessee (TN) Music Stores (from your latest provided text)
+(This includes Memphis and the two Nashville lists, deduplicated based on the information provided in this specific text block)
+Store Name	Address	City	State	ZIP	Phone	Website	Email
+Memphis Drum Shop	878 S Cooper St	Memphis	TN	38104	(901) 276-2328	memphisdrumshop.com	info@memphisdrumshop.com
+Shangri-La Records	1916 Madison Ave	Memphis	TN	38104	(901) 274-1916	shangri.com	info@shangri.com
+Spin Street Music	3484 Poplar Ave	Memphis	TN	38111	(901) 323-0609	spinstreet.com	info@spinstreet.com
+Gruhn Guitars	2120 8th Ave S	Nashville	TN	37204	(615) 256-2033	gruhnguitars.com	gruhn@gruhn.com (also listed as N/A for one entry)
+Corner Music	3048 Dickerson Pike	Nashville	TN	37207	(615) 297-9559	cornermusic.com	info@cornermusic.com
+Fork’s Drum Closet	308 Chestnut St	Nashville	TN	37210	(615) 383-8343	forksdrumcloset.com	info@forksdrumcloset.com
+Fanny’s House of Music	1101 Holly St	Nashville	TN	37206	(615) 750-5746	fannyshouseofmusic.com	info@fannyshouseofmusic.com
+Carter Vintage Guitars	625 8th Ave S	Nashville	TN	37203	(615) 915-1851	cartervintage.com	info@cartervintage.com
+Eastside Music Supply	1101 Holly St	Nashville	TN	37206	(615) 730-6492	eastsidemusicsupply.com	info@eastsidemusicsupply.com
+Artisan Guitars	1648 Mallory Ln, Suite 102	Brentwood	TN	37027	(615) 372-0100	artisanguitars.com	info@artisanguitars.com
+Rumble Seat Music	2208 Dunster St	Nashville	TN	37216	(615) 915-2510	rumbleseatmusic.com	info@rumbleseatmusic.com
+Nashville Used & New Music	4876 Nolensville Pike	Nashville	TN	37211	(615) 837-7529	nashvilleusedmusic.com	info@nashvilleusedmusic.com
+Shiloh Music Center	4056 N Mt Juliet Rd	Mt Juliet	TN	37122	(615) 758-9437	shilohmusiccenter.com	info@shilohmusiccenter.com
+Sam Ash Music	1647 Gallatin Pike N	Madison	TN	37115	(615) 860-7475	samash.com	stores@samash.com
+Lane Music	1625 Galleria Blvd	Brentwood	TN	37027	(629) 205-1355	lanemusic.com	info@lanemusic.com
+Nashville Music Company	4111C Hillsboro Pike	Nashville	TN	37215	(615) 292-5651	nashvillemusicco.com	info@nashvillemusicco.com
+Grimey’s New & Preloved	1060 E Trinity Ln, Suite 101	Nashville	TN	37216	(615) 226-3811	grimeys.com	info@grimeys.com
+Third Man Records	623 7th Ave S	Nashville	TN	37203	(615) 891-4393	thirdmanrecords.com	info@thirdmanrecords.com
+The Piano Gallery	1270 Franklin Rd	Brentwood	TN	37027	(615) 373-5901	pianogallerytn.com	info@pianogallerytn.com
+Nashville Piano Rescue	1113 Murfreesboro Pike	Nashville	TN	37217	(615) 383-3666	nashvillepianorescue.com	info@nashvillepianorescue.com
+The Violin Shop	4104 Hillsboro Pike	Nashville	TN	37215	(615) 383-9631	violinshop.com	info@violinshop.com
+Williams Fine Violins	4544 Harding Pike, Suite 102	Nashville	TN	37205	(615) 292-5196	williamsfineviolins.com	info@williamsfineviolins.com
+Blues Vintage Guitars	434 Houston St, Suite 131	Nashville	TN	37203	(615) 385-5463	bluesvintageguitars.com	info@bluesvintageguitars.com
+Part 4: Wisconsin (WI) Music Stores (from your latest provided text)
+(This consolidates and deduplicates the two Wisconsin lists provided in your most recent text block)
+Store Name	Address	City	State	ZIP	Phone	Website	Email
+Dave’s Guitar Shop	914 S 5th St	Milwaukee	WI	53204	(414) 763-2120	davesguitar.com/milwaukee	info@davesguitar.com
+Dave’s Guitar Shop	324 N Main St	La Crosse	WI	54601	(608) 785-7704	davesguitar.com/lacrosse	info@davesguitar.com
+Dave’s Guitar Shop	1227 S Main St	Stevens Point	WI	54481	(715) 344-8030	davesguitar.com/stevens-point	info@davesguitar.com
+Heid Music	7948 Tree Ln	Madison	WI	53717	(608) 829-1969	heidmusic.com	madison@heidmusic.com
+Heid Music	308 E College Ave	Appleton	WI	54911	(920) 734-1969	heidmusic.com	appleton@heidmusic.com
+Heid Music	2605 S Oneida St	Green Bay	WI	54304	(920) 498-2228	heidmusic.com	greenbay@heidmusic.com
+Heid Music	1750 W South Park Ave	Oshkosh	WI	54902	(920) 651-4343	heidmusic.com	oshkosh@heidmusic.com
+Brass Bell Music	210 W Silver Spring Dr	Milwaukee	WI	53217	(414) 963-1000	brassbellmusic.com	info@brassbellmusic.com
+Music Go Round	7425 W Holmes Ave	Greenfield	WI	53220	(414) 281-2777	musicgoround.com/greenfield	mgr.greenfieldwi@musicgoround.com
+White House of Music	2101 N Springdale Rd	Pewaukee	WI	53072	(262) 798-9700	whitehouseofmusic.com	info@whitehouseofmusic.com
+White House of Music	136 N Main St	West Bend	WI	53095	(262) 334-1232	whitehouseofmusic.com	info@whitehouseofmusic.com
+White House of Music	1005 N Watertown Ave	Watertown	WI	53098	(920) 261-0700	whitehouseofmusic.com	info@whitehouseofmusic.com
+White House of Music	14685 W Capitol Dr	Brookfield	WI	53005	(262) 754-0700	whitehouseofmusic.com	info@whitehouseofmusic.com
+Jim’s Music	1920 S Memorial Dr	Appleton	WI	54915	(920) 734-1969	jimsmusiconline.com	appleton@jimsmusiconline.com
+Jim’s Music	1217 S 14th St	Sheboygan	WI	53081	(920) 458-1817	jimsmusiconline.com	sheboygan@jimsmusiconline.com
+Jim’s Music	1600 S 9th St	Manitowoc	WI	54220	(920) 684-0823	jimsmusiconline.com	manitowoc@jimsmusiconline.com
+Jim’s Music	1423 Washington St	Marinette	WI	54143	(715) 732-1234	jimsmusiconline.com	marinette@jimsmusiconline.com
+Cream City Music	12505 W Bluemound Rd	Brookfield	WI	53005	(262) 860-1800	creamcitymusic.com	service@creamcitymusic.com
+Distinctive Guitar	2505 S Howell Ave	Milwaukee	WI	53207	(414) 877-1666	distinctiveguitar.com	info@distinctiveguitar.com
+Top Shelf Guitar Shop	2358 S Kinnickinnic Ave	Milwaukee	WI	53207	(414) 481-8677	topshelfguitarshop.com	info@topshelfguitarshop.com
+Chondro Guitars	821 Meadowbrook Rd Ste 8	Waukesha	WI	53188	(262) 875-4201	chondroguitars.com	info@chondroguitars.com
+Rockhaus Guitars	1000 E Center St	Milwaukee	WI	53212	(414) 372-7900	rockhausguitars.com	info@rockhausguitars.com
+The Exclusive Company	770 W Northland Ave	Appleton	WI	54914	(920) 731-6010	exclusivecompany.com	N/A
+The Exclusive Company	5026 S 74th St	Greenfield	WI	53220	(414) 325-0880	exclusivecompany.com	N/A
+The Exclusive Company	1669 N Farwell Ave	Milwaukee	WI	53202	(414) 271-8590	exclusivecompany.com	N/A
+Lilliput Records	2960 S Kinnickinnic Ave	Milwaukee	WI	53207	(414) 271-8590	lilliputrecords.com	info@lilliputrecords.com
+Rushmor Records	2635 S Kinnickinnic Ave	Milwaukee	WI	53207	(414) 481-4890	rushmor.com	rushmorrecords@gmail.com
+Record Head	7045 W Greenfield Ave	West Allis	WI	53214	(414) 453-3900	recordhead.biz	info@recordhead.biz
+Acme Records & Music Emporium	2341 S Kinnickinnic Ave	Milwaukee	WI	53207	(414) 744-5369	acmerecordsmke.com	info@acmerecordsmke.com
+Just Listen Records	2622 N Downer Ave	Milwaukee	WI	53211	(414) 964-3767	justlistenrecords.com	info@justlistenrecords.com
+Knick Knack Records	100 E Capitol Dr	Hartland	WI	53029	(262) 367-7817	knickknackrecords.com	info@knickknackrecords.com
+Rock N Roll Land	504 S Military Ave	Green Bay	WI	54303	(920) 490-2881	rocknrollland.com	info@rocknrollland.com
+Instrumental Music Co	920 S Military Ave	Green Bay	WI	54304	(920) 498-2228	instrumental-music.com	info@instrumental-music.com
+Lloyd’s Guitars	2747 Manitowoc Rd	Green Bay	WI	54311	(920) 857-3767	lloydsguitars.com	info@lloydsguitars.com
+Jim Zill Guitar Repair	1624 Losey Blvd S	La Crosse	WI	54601	(608) 785-7704	jimzguitarrepair.com	info@jimzguitarrepair.com
+Offbeats Violin & Guitar	1328 W Clairemont Ave	Eau Claire	WI	54701	(715) 832-9392	offbeatsviolin.com	info@offbeatsviolin.com
+Guitar Shop of Wisconsin	2929 E Washington Ave	Madison	WI	53704	(608) 249-5444	guitarshopofwisconsin.com	info@guitarshopofwisconsin.com
+Music Center Inc.	7700 Green Bay Rd	Kenosha	WI	53142	(262) 697-9393	musiccenterinc.com	info@musiccenterinc.com
+Ward-Brodt Music	5976 Executive Dr	Madison	WI	53719	(608) 661-8600	ward-brodt.com	info@ward-brodt.com
+Blue Note Music	1309 Regent St	Madison	WI	53715	(608) 251-5025	bluenotemusic.com	info@bluenotemusic.com
+Baraboo Music LLC	129 3rd St (also listed as 325 3rd St with different phone)	Baraboo	WI	53913	(608) 355-0207 (also (608) 356-8811)	baraboomusic.com	info@baraboomusic.com
+Lincoln Music House	3379 S 13th St	Milwaukee	WI	53215	(414) 647-9608	lincolnmusichouse.com	info@lincolnmusichouse.com
+Uncle Bob’s Music Center	5080 S 108th St	Greenfield	WI	53228	(414) 529-8910	unclebobsmusic.com	info@unclebobsmusic.com
+Outpost Music	1330 S Commercial St	Neenah	WI	54956	(920) 722-9400	outpostmusic.com	info@outpostmusic.com
+Schmitt Music	6750 W Layton Ave	Greenfield	WI	53220	(414) 281-3500	schmittmusic.com	info@schmittmusic.com
+West End Music	1131 N 8th St	Sheboygan	WI	53081	(920) 458-5842	westendmusic.com	info@westendmusic.com
+Music Masters Green Bay	1169 Velp Ave	Green Bay	WI	54303	(920) 499-0700	musicmastersgreenbay.com	info@musicmastersgreenbay.com (also ...gree)
+The Guitar Doctor	1802 S 15th St	Sheboygan	WI	53081	(920) 457-1191	guitardoctorwi.com	info@guitardoctorwi.com
+New Frontier Record Exchange	109 N Main St	Oshkosh	WI	54901	(920) 235-1450	N/A	N/A
+Main Street Music	101 W Main St	Sun Prairie	WI	53590	(608) 837-3665	mainstreetmusic.net	info@mainstreetmusic.net
+Spring Valley Music	S430 McKay Ave	Spring Valley	WI	54767	(715) 778-4334	springvalleymusic.com	

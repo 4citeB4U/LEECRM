@@ -1,0 +1,322 @@
+/* Custom styles for Agent Lee CRM System */
+
+/* Base Elements */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+  background-color: #f8fafc;
+}
+
+body.dark-mode {
+  background-color: #0f172a;
+  color: #f1f5f9;
+}
+
+/* Tab styling */
+.tab-active {
+  border-bottom: 3px solid #6366f1;
+  color: #6366f1;
+  font-weight: 500;
+  position: relative;
+}
+
+.tab-active::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #6366f1, #14b8a6);
+  border-radius: 3px;
+}
+
+/* Map container */
+#map {
+  height: 100%;
+  min-height: 500px;
+  width: 100%;
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Side menu */
+.side-menu {
+  height: calc(100vh - 4rem);
+  overflow-y: auto;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.dark-mode .side-menu {
+  background-color: rgba(15, 23, 42, 0.85);
+}
+
+/* Agent panel */
+.agent-panel {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 999;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  max-width: 400px;
+  width: 100%;
+}
+
+.agent-panel.minimized {
+  width: 60px;
+  height: 60px;
+  max-width: 60px;
+  overflow: hidden;
+  padding: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Recording animation */
+.recording-wave {
+  animation: recording 1.5s infinite ease-in-out;
+  will-change: transform, background-color;
+}
+
+@keyframes recording {
+  0% { transform: scale(1); background-color: rgba(99, 102, 241, 0.7); }
+  50% { transform: scale(1.1); background-color: rgba(99, 102, 241, 0.9); }
+  100% { transform: scale(1); background-color: rgba(99, 102, 241, 0.7); }
+}
+
+/* Hide scrollbar but allow scrolling */
+.hide-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.hide-scrollbar::-webkit-scrollbar-track {
+  background: rgba(203, 213, 225, 0.2);
+  border-radius: 10px;
+}
+
+.hide-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.5);
+  border-radius: 10px;
+}
+
+.hide-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.8);
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Glass morphism effects */
+.glass {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.glass-dark {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(30, 41, 59, 0.5);
+}
+
+/* 3D card hover effects */
+.card-3d {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-3d:hover {
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Campaign Message */
+.campaign-message {
+  min-height: 150px;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+/* Email Signature Styles */
+.email-signature {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.email-signature h3 {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 16px;
+  font-weight: 600;
+  color: #6366f1;
+  margin: 0;
+}
+
+.email-signature p {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 12px;
+  color: #64748b;
+  margin: 4px 0 0;
+}
+
+.email-signature .contact-info {
+  margin-top: 8px;
+}
+
+.email-signature .contact-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.email-signature .icon {
+  color: #6366f1;
+}
+
+.email-signature .tagline {
+  margin-top: 12px;
+  font-style: italic;
+  font-size: 10px;
+  color: #64748b;
+}
+
+/* Video Player */
+.video-player {
+  height: 200px;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* Progress Bar */
+.progress-bar-fill {
+  width: 32%;
+  transition: width 1s ease;
+}
+
+/* Email Templates */
+.email-template h2 {
+  color: #0f172a;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.email-template h3 {
+  color: #6366f1;
+}
+
+/* Loading animation */
+.loading-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #6366f1, #14b8a6);
+  z-index: 9999;
+  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+.loader {
+  width: 80px;
+  height: 80px;
+  position: relative;
+}
+
+.loader:before, .loader:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: white;
+  opacity: 0.6;
+  animation: pulse-ring 2s linear infinite;
+}
+
+.loader:after {
+  animation-delay: 1s;
+}
+
+.loader-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  color: white;
+  z-index: 1;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+}
+
+.loading-hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Gradient animations for buttons and elements */
+.gradient-btn {
+  background-size: 200% 200%;
+  background-image: linear-gradient(45deg, #6366f1, #14b8a6, #6366f1);
+  animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Gradient text */
+.gradient-text {
+  background-image: linear-gradient(45deg, #6366f1, #14b8a6);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Analytics chart styling */
+.chart-container {
+  height: 200px;
+  position: relative;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+/* Grid for dashboard layout */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}

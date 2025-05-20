@@ -1,0 +1,130 @@
+/* Custom styles for Agent Lee CRM System */
+
+/* Map container */
+#map {
+  height: 100%;
+  min-height: 300px;
+  width: 100%;
+}
+
+/* Tab navigation */
+.tab-active {
+  border-bottom: 3px solid #3b82f6;
+  color: #3b82f6;
+}
+
+/* Side menu */
+.side-menu {
+  height: calc(100vh - 4rem);
+  overflow-y: auto;
+}
+
+/* Agent panel */
+.agent-panel {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 999;
+  transition: all 0.3s ease;
+  max-width: 400px;
+  width: 100%;
+}
+
+.agent-panel.minimized {
+  width: 60px;
+  height: 60px;
+  max-width: 60px;
+  overflow: hidden;
+  padding: 0;
+  border-radius: 50%;
+}
+
+/* Recording animation */
+.recording-wave {
+  animation: recording 1.5s infinite ease-in-out;
+  will-change: transform, background-color;
+}
+
+@keyframes recording {
+  0% { transform: scale(1); background-color: rgba(239, 68, 68, 0.7); }
+  50% { transform: scale(1.1); background-color: rgba(239, 68, 68, 0.9); }
+  100% { transform: scale(1); background-color: rgba(239, 68, 68, 0.7); }
+}
+
+/* Hide scrollbar but allow scrolling */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none; /* Firefox */
+  -webkit-overflow-scrolling: touch; /* iOS momentum scrolling */
+}
+
+/* Campaign Message */
+.campaign-message {
+  min-height: 150px;
+}
+
+/* Email Signature Styles */
+.email-signature {
+  font-family: 'Inter', sans-serif;
+}
+
+.email-signature h3 {
+  font-family: 'Fira Code', monospace;
+  font-size: 16px;
+  font-weight: 600;
+  color: #3182ce;
+  margin: 0;
+}
+
+.email-signature p {
+  font-family: 'Fira Code', monospace;
+  font-size: 12px;
+  color: #718096;
+  margin: 4px 0 0;
+}
+
+.email-signature .contact-info {
+  margin-top: 8px;
+}
+
+.email-signature .contact-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.email-signature .icon {
+  color: #3182ce;
+}
+
+.email-signature .tagline {
+  margin-top: 12px;
+  font-style: italic;
+  font-size: 10px;
+  color: #718096;
+}
+
+/* Video Player */
+.video-player {
+  height: 200px;
+}
+
+/* Progress Bar */
+.progress-bar-fill {
+  width: 32%;
+}
+
+/* Email Templates */
+.email-template h2 {
+  color: #2d3748;
+}
+
+.email-template h3 {
+  color: #2b6cb0;
+}
