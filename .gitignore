@@ -1,5 +1,3 @@
-
-
 # Node & JavaScript/SPA/Frontend typical ignores
 node_modules/
 npm-debug.log*
