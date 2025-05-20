@@ -1,0 +1,141 @@
+START
+  ↓
+Load Memory:
+  - Chunking rules & max size
+  - Task planning template
+  - Past task state
+
+Receive Input
+  ↓
+Preprocess Input:
+  - Check input length
+  - If too large → split input into chunks using chunking rules
+  ↓
+Plan Task for each chunk:
+  - Create subtasks for each chunk
+  ↓
+For each chunk:
+  - Execute task on chunk
+  - Save progress & partial outputs
+  - Refer back to chunking logic if needed (e.g., dynamic re-chunk)
+  ↓
+Aggregate all chunk outputs
+  ↓
+Return final combined output
+  ↓
+Update memory with new state or improvements
+end steps start repeat of logg after every attempt to call tool faails. try again plan this time think leeway
+
+
+Claude 3.7 Sonnet has a 200,000-token context window, meaning the sum of all input and generated tokens in a conversation turn cannot exceed ~200K
+docs.anthropic.com
+. In practice, you set max_tokens (the output budget) so that prompt_tokens + max_tokens ≤ 200000 – otherwise the API throws a validation error
+docs.anthropic.com
+. By default, the output is limited to 64K tokens (per-model maximum), but a special beta mode allows up to 128K output tokens
+docs.anthropic.com
+ (still subject to the 200K total limit). If you exceed these limits, the API returns an error (e.g. “prompt is too long”)
+docs.anthropic.com
+. Anthropic’s rate-limit docs also note a 413 request_too_large error when the request size (in tokens/bytes) is too big
+docs.anthropic.com
+.
+Context window: 200K tokens total (input + output)
+docs.anthropic.com
+.
+Default max output: 64K tokens (can be extended to 128K with a beta header)
+docs.anthropic.com
+.
+Enforced limit: If prompt + max_tokens > 200K, the call fails
+docs.anthropic.com
+.
+Tokenization & Input Chunking
+Claude does not auto-chunk input for you – you must split long text yourself. To do this safely, use Anthropic’s token-counting tools to measure and break your text: for example, Anthropic offers a token counting endpoint in its SDKs
+docs.anthropic.com
+stackoverflow.com
+. In Python, anthropic.Client().count_tokens(message) will return the estimated token count for your message (same for TypeScript). You can also send a dummy request and inspect response.usage.input_tokens for the exact count
+stackoverflow.com
+. Armed with token counts, split your content on sentence boundaries or semantic breaks so each chunk stays under the token limit.
+Token counting API: Use the count_tokens endpoint (via SDK or HTTP) to get the number of tokens in any prompt
+docs.anthropic.com
+stackoverflow.com
+. For example, client.count_tokens("Hello world").
+Manual chunking: There’s no built-in Claude feature for auto-chunking; you should trim or split prompts that exceed the limit (the API will return a 400 or 413 error if too long)
+docs.anthropic.com
+.
+Libraries: Community tools (like the anthropic-tokenizer on GitHub or LangChain’s ChatAnthropic methods) can also approximate Claude’s tokenization to help chunk text.
+Multi-Turn Conversation Support
+Claude’s Messages API is designed for chat-style use. It is stateless, so you maintain the conversation context by passing in the full list of previous messages on each call. Each message in the request has a role ("user", "assistant", or "system") and content text. For multi-turn dialogues, simply append each new user or assistant message to the messages array
+docs.anthropic.com
+docs.aws.amazon.com
+. For example:
+json
+Copy
+[
+  {"role": "user", "content": "Hello there."},
+  {"role": "assistant", "content": "Hi, I'm Claude. How can I help?"},
+  {"role": "user", "content": "Explain LLMs to me."}
+]
+The API will then generate the next assistant message. (You can also use a system message at the start for instructions or context
+docs.aws.amazon.com
+.) Note that all passed messages count toward the context window, so long histories may hit the token limit.
+Stateless chat: On each API call, include the full conversation history in messages. Claude will return the next turn. The API itself does not “remember” past calls – it only sees what you send.
+docs.anthropic.com
+docs.aws.amazon.com
+Message roles: Use "system" for global instructions (e.g. “You are a helpful assistant”), "user" for user prompts, and "assistant" for Claude’s past responses.
+Extended thinking: If you use Claude’s internal chain-of-thought (thinking) mode, past “thinking blocks” are automatically stripped from the next turn’s input, so you don’t pay for or count them again
+docs.anthropic.com
+.
+Asynchronous and Parallel Calls
+The Claude API offers several ways to handle long or high-volume workloads:
+Streaming responses: You can set "stream": true on a call to receive the assistant’s output incrementally (via Server-Sent Events). This is useful for long outputs to start consuming text before the full completion
+docs.anthropic.com
+. Both the official Python and TypeScript SDKs support streaming (sync or async)
+docs.anthropic.com
+.
+Message Batches API: Anthropic provides a Batch API for asynchronous, high-throughput jobs
+docs.anthropic.com
+. You submit a batch of up to 100,000 messages (or 256 MB) and poll for results. Each message in the batch is processed independently. This is recommended for bulk tasks (e.g. many documents) and can reduce cost by 50%
+docs.anthropic.com
+. Claude 3.7 Sonnet on the Batch API also supports up to 128K output tokens per item
+docs.anthropic.com
+.
+Client parallelism: For typical single-chat calls, you can also make concurrent requests from your application (limited by your rate limits). For example, one user ran multiple threads with Python’s ThreadPoolExecutor, sending different prompts in parallel to the Anthropic client
+stackoverflow.com
+. The key is to throttle concurrency so you don’t exceed the per-minute token or request limits
+docs.anthropic.com
+.
+Example (Python) showing parallel calls (from StackOverflow)
+stackoverflow.com
+:
+python
+Copy
+from concurrent.futures import ThreadPoolExecutor
+from anthropic import Anthropic
+client = Anthropic(api_key=API_KEY)
+
+def ask(prompt):
+    return client.messages.create(model="claude-3-7-sonnet", messages=[
+        {"role": "user", "content": prompt}
+    ]).content[0].text
+
+prompts = ["Q1?", "Q2?", "Q3?"]
+with ThreadPoolExecutor(max_workers=3) as pool:
+    responses = pool.map(ask, prompts)
+(Adjust max_workers to stay within your rate limits.)
+Retry Logic & Error Handling Best Practices
+Handle “prompt too long” errors: If a call fails with a validation error or HTTP 400/413 (often saying “input is too long” or “exceeds maximum allowed limit”), you should shorten the prompt. Strategies include using the token-count API to detect oversize input in advance and then trimming or chunking the text
+docs.anthropic.com
+docs.anthropic.com
+. Automate this by catching the error, reducing max_tokens or removing older messages, and retrying. Rate limits (429 errors): Exceeding your RPM/ITPM/OTPM limits causes a 429 error. The response includes a Retry-After header
+docs.anthropic.com
+. Best practice is to back off for the indicated time (often a few seconds) before retrying. Implement exponential backoff with jitter for robustness. Server overload (529 errors): A 529 overloaded_error means Anthropic’s service is under heavy load
+docs.anthropic.com
+. The docs advise ramping up traffic gradually to avoid this
+docs.anthropic.com
+. Upon 529, wait longer (e.g. tens of seconds) before retrying, and consider slowing request rate. Long timeouts: Claude 3.7 has up to a 60-minute timeout for inference (especially with long outputs)
+docs.aws.amazon.com
+. If your client times out (default SDK timeouts may be ~60s), increase the read timeout. For very long outputs, use the streaming or batch APIs as noted – Anthropic explicitly recommends these for “long running requests” (over ~10 minutes)
+docs.anthropic.com
+. General retries: For transient HTTP 500-range errors, also use backoff and retry a few times. Include logging of the unique x-request-id (returned on every response) to help debug persistent issues
+docs.anthropic.com
+. In summary, catch errors, inspect status codes/messages, and apply standard retry/backoff patterns: honor retry-after, split overly long inputs, and use streaming/batch for heavy workloads
+docs.anthropic.com

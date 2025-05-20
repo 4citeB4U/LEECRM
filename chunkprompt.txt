@@ -1,0 +1,120 @@
+1. Implement a robust chunking function
+You need to split input text into smaller parts that guarantee they fit the tool’s max input size (e.g., 1000 chars).
+
+Here’s a simple chunk splitter based on sentences or paragraphs that ensures no chunk exceeds max_size:
+
+python
+Copy
+import re
+
+def split_text_to_chunks(text, max_size):
+    # Split text into sentences using a simple regex
+    sentences = re.split(r'(?<=[.!?])\s+', text)
+    
+    chunks = []
+    current_chunk = ""
+    
+    for sentence in sentences:
+        if len(current_chunk) + len(sentence) + 1 <= max_size:
+            current_chunk += " " + sentence if current_chunk else sentence
+        else:
+            # Current chunk full, push it and start new chunk
+            chunks.append(current_chunk)
+            current_chunk = sentence
+    
+    if current_chunk:
+        chunks.append(current_chunk)
+    
+    return chunks
+2. Integrate this chunker into your AgenticController:
+Update your class to include the splitter:
+
+python
+Copy
+class AgenticController:
+    def __init__(self):
+        self.memory = {
+            'chunking_strategy': self.default_chunking,
+            'max_chunk_size': 1000,
+            'task_plan': None,
+            'processed_chunks': [],
+            'results': []
+        }
+
+    def default_chunking(self, text, max_size):
+        return split_text_to_chunks(text, max_size)
+
+    def preprocess_input(self, input_text):
+        if len(input_text) <= self.memory['max_chunk_size']:
+            return [input_text]
+        return self.memory['chunking_strategy'](input_text, self.memory['max_chunk_size'])
+
+    def plan_tasks(self, chunks):
+        self.memory['task_plan'] = [f"Process chunk {i+1}" for i in range(len(chunks))]
+
+    def execute(self, input_text):
+        chunks = self.preprocess_input(input_text)
+        self.plan_tasks(chunks)
+        for idx, chunk in enumerate(chunks):
+            # Replace call_tool with your actual tool call
+            result = call_tool(chunk)
+            self.memory['processed_chunks'].append(chunk)
+            self.memory['results'].append(result)
+        return self.aggregate_results()
+
+    def aggregate_results(self):
+        return "\n".join(self.memory['results'])
+3. Defensive Check Before Calling the Tool
+Add a check to ensure no chunk exceeds max size before calling the tool:
+
+python
+Copy
+def execute(self, input_text):
+    chunks = self.preprocess_input(input_text)
+    self.plan_tasks(chunks)
+    for idx, chunk in enumerate(chunks):
+        if len(chunk) > self.memory['max_chunk_size']:
+            raise ValueError(f"Chunk {idx} too large for tool: {len(chunk)} chars")
+        result = call_tool(chunk)
+        self.memory['processed_chunks'].append(chunk)
+        self.memory['results'].append(result)
+    return self.aggregate_results()
+4. Debugging Tips
+Print or log chunk sizes:
+
+python
+Copy
+print(f"Total chunks: {len(chunks)}")
+for i, c in enumerate(chunks):
+    print(f"Chunk {i} size: {len(c)}")
+Confirm your tool’s actual max input length. Adjust max_chunk_size accordingly (e.g., if tool max is 4096 tokens, convert tokens to approx chars or use tokenizer).
+
+If your tool uses tokens (like GPT), consider using a tokenizer (e.g., HuggingFace’s tokenizer) to chunk by tokens instead of characters.
+
+5. Example with Tokenizer-based Chunking (Optional)
+If you use a tokenizer:
+
+python
+Copy
+from transformers import AutoTokenizer
+
+tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
+
+def split_text_to_token_chunks(text, max_tokens):
+    tokens = tokenizer.tokenize(text)
+    chunks = []
+    for i in range(0, len(tokens), max_tokens):
+        chunk_tokens = tokens[i:i + max_tokens]
+        chunk_text = tokenizer.convert_tokens_to_string(chunk_tokens)
+        chunks.append(chunk_text)
+    return chunks
+Summary:
+Implement or fix your split_text_to_chunks to guarantee chunks are below max size.
+
+Validate chunk sizes before calling your tool.
+
+Adjust max_chunk_size to match your tool’s real input limits.
+
+Optionally use token-based chunking if your tool counts tokens, not chars.
+
+
