@@ -1,0 +1,66 @@
+
+
+# Node & JavaScript/SPA/Frontend typical ignores
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+.env
+.env.*
+dist/
+build/
+.tmp/
+temp/
+coverage/
+
+# OS and IDE files
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# Log files
+*.log
+
+# Backup and swap
+*.swp
+*.bak
+*.backup
+
+# Compiled output/media (from context, if relevant, may want to ignore video/audio temporarily)
+*.mp3
+*.mp4
+*.avi
+*.mov
+
+# Cache folders
+.cache/
+.cache-loader/
+.pnpm-debug.log
+
+# Miscellaneous
+*.tgz
+
+# Leeway/AI-specific, SPA Universal Compiler, and context-persistent artifacts
+.qodo/
+# Uncomment below if .qodo should *not* be committed:
+# .qodo/*
+
+# Misc config samples (keep *_example.js, ignore actual config if sensitive)
+config.js
+
+# Ignore local screenshots and card images (optional, uncomment if images are recreated/generated)
+# *.png
+# *.ico
+
+# Ignore HTML output/backups if editor-generated or not source of truth (optional)
+# *.html.backup
+
+# Local documentation artifacts or working state (optional)
+*.md~
+
+# Uncomment the rules above or add your specifics as you see fit!
