@@ -1,0 +1,125 @@
+<!-- To-Dos Tab Content -->
+<section id="todos-tab" class="hidden space-y-6">
+  <div class="bg-white/90 dark:bg-dark-800/90 backdrop-blur-lg rounded-2xl shadow-lg p-6 border border-dark-100/50 dark:border-dark-700/50">
+    <h2 class="text-xl font-display font-bold mb-4 text-dark-900 dark:text-white flex items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+      </svg>
+      AI-Assisted To-Dos
+    </h2>
+    
+    <div class="flex flex-wrap gap-3 mb-4">
+      <div class="relative flex-grow">
+        <input type="text" id="todos-search" placeholder="Search to-dos..." class="w-full p-3 pl-10 bg-dark-100/50 dark:bg-dark-700/50 border-0 rounded-xl focus:ring-2 focus:ring-secondary" aria-label="Search to-dos">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 absolute left-3 top-3.5 text-dark-400 dark:text-dark-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+      </div>
+
+      <select id="todos-filter" class="p-3 bg-dark-100/50 dark:bg-dark-700/50 border-0 rounded-xl focus:ring-2 focus:ring-secondary text-dark-700 dark:text-dark-300" aria-label="Filter to-dos">
+        <option value="all">All To-Dos</option>
+        <option value="pending">Pending</option>
+        <option value="completed">Completed</option>
+        <option value="high">High Priority</option>
+        <option value="medium">Medium Priority</option>
+        <option value="low">Low Priority</option>
+      </select>
+
+      <button type="button" id="add-todo-btn" class="gradient-btn px-5 py-3 text-white rounded-xl hover:shadow-lg focus:outline-none flex items-center space-x-2 transition-all duration-200">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+        <span>Add To-Do</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- To-Dos List -->
+  <div id="todos-list" class="space-y-4">
+    <!-- Will be populated dynamically -->
+    <div class="animate-pulse space-y-4">
+      <div class="bg-white dark:bg-dark-700 rounded-xl p-4 shadow-sm">
+        <div class="h-5 bg-dark-200 dark:bg-dark-600 rounded w-3/4 mb-2"></div>
+        <div class="h-4 bg-dark-200 dark:bg-dark-600 rounded w-1/2 mb-2"></div>
+        <div class="h-4 bg-dark-200 dark:bg-dark-600 rounded w-1/4"></div>
+      </div>
+      <div class="bg-white dark:bg-dark-700 rounded-xl p-4 shadow-sm">
+        <div class="h-5 bg-dark-200 dark:bg-dark-600 rounded w-3/4 mb-2"></div>
+        <div class="h-4 bg-dark-200 dark:bg-dark-600 rounded w-1/2 mb-2"></div>
+        <div class="h-4 bg-dark-200 dark:bg-dark-600 rounded w-1/4"></div>
+      </div>
+      <div class="bg-white dark:bg-dark-700 rounded-xl p-4 shadow-sm">
+        <div class="h-5 bg-dark-200 dark:bg-dark-600 rounded w-3/4 mb-2"></div>
+        <div class="h-4 bg-dark-200 dark:bg-dark-600 rounded w-1/2 mb-2"></div>
+        <div class="h-4 bg-dark-200 dark:bg-dark-600 rounded w-1/4"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add To-Do Modal -->
+  <div id="add-todo-modal" class="fixed inset-0 z-50 hidden overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen p-4">
+      <div class="fixed inset-0 bg-dark-900/50 backdrop-blur-sm transition-opacity" id="todo-modal-backdrop"></div>
+      
+      <div class="relative bg-white dark:bg-dark-800 rounded-2xl shadow-xl max-w-lg w-full p-6 overflow-hidden transform transition-all">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-lg font-display font-bold text-dark-900 dark:text-white" id="todo-modal-title">Add New To-Do</h3>
+          <button type="button" id="close-todo-modal" class="text-dark-500 hover:text-dark-700 dark:text-dark-400 dark:hover:text-dark-200">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        
+        <form id="todo-form" class="space-y-4">
+          <div>
+            <label for="todo-task" class="block text-sm font-medium text-dark-700 dark:text-dark-300 mb-1">Task</label>
+            <div class="flex">
+              <input type="text" id="todo-task" class="flex-grow p-3 bg-dark-100/50 dark:bg-dark-700/50 border-0 rounded-l-xl focus:ring-2 focus:ring-secondary" placeholder="Enter task..." required>
+              <button type="button" id="todo-voice-btn" class="p-3 bg-secondary text-white rounded-r-xl hover:bg-secondary-600 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="todo-priority" class="block text-sm font-medium text-dark-700 dark:text-dark-300 mb-1">Priority</label>
+              <select id="todo-priority" class="w-full p-3 bg-dark-100/50 dark:bg-dark-700/50 border-0 rounded-xl focus:ring-2 focus:ring-secondary">
+                <option value="High">High</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="Low">Low</option>
+              </select>
+            </div>
+            
+            <div>
+              <label for="todo-due-date" class="block text-sm font-medium text-dark-700 dark:text-dark-300 mb-1">Due Date</label>
+              <input type="date" id="todo-due-date" class="w-full p-3 bg-dark-100/50 dark:bg-dark-700/50 border-0 rounded-xl focus:ring-2 focus:ring-secondary">
+            </div>
+          </div>
+          
+          <div>
+            <label for="todo-related" class="block text-sm font-medium text-dark-700 dark:text-dark-300 mb-1">Related To</label>
+            <input type="text" id="todo-related" class="w-full p-3 bg-dark-100/50 dark:bg-dark-700/50 border-0 rounded-xl focus:ring-2 focus:ring-secondary" placeholder="Contact or company name...">
+          </div>
+          
+          <div>
+            <label for="todo-notes" class="block text-sm font-medium text-dark-700 dark:text-dark-300 mb-1">Notes</label>
+            <textarea id="todo-notes" class="w-full p-3 bg-dark-100/50 dark:bg-dark-700/50 border-0 rounded-xl focus:ring-2 focus:ring-secondary h-24" placeholder="Additional notes..."></textarea>
+          </div>
+          
+          <div class="flex justify-end space-x-3 pt-4 border-t border-dark-100 dark:border-dark-700">
+            <button type="button" id="cancel-todo-btn" class="px-4 py-2 bg-dark-200 dark:bg-dark-700 text-dark-700 dark:text-dark-300 rounded-lg hover:bg-dark-300 dark:hover:bg-dark-600 transition-colors">
+              Cancel
+            </button>
+            <button type="submit" id="save-todo-btn" class="px-4 py-2 gradient-btn text-white rounded-lg hover:shadow-md transition-all">
+              Save To-Do
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

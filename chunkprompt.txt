@@ -1,120 +1,74 @@
-1. Implement a robust chunking function
-You need to split input text into smaller parts that guarantee they fit the tool’s max input size (e.g., 1000 chars).
-
-Here’s a simple chunk splitter based on sentences or paragraphs that ensures no chunk exceeds max_size:
-
-python
-Copy
 import re
 
-def split_text_to_chunks(text, max_size):
-    # Split text into sentences using a simple regex
-    sentences = re.split(r'(?<=[.!?])\s+', text)
-    
-    chunks = []
-    current_chunk = ""
-    
-    for sentence in sentences:
-        if len(current_chunk) + len(sentence) + 1 <= max_size:
-            current_chunk += " " + sentence if current_chunk else sentence
-        else:
-            # Current chunk full, push it and start new chunk
-            chunks.append(current_chunk)
-            current_chunk = sentence
-    
-    if current_chunk:
-        chunks.append(current_chunk)
-    
-    return chunks
-2. Integrate this chunker into your AgenticController:
-Update your class to include the splitter:
-
-python
-Copy
 class AgenticController:
-    def __init__(self):
+    def __init__(self, max_chunk_size=1000):
         self.memory = {
             'chunking_strategy': self.default_chunking,
-            'max_chunk_size': 1000,
-            'task_plan': None,
+            'max_chunk_size': max_chunk_size,
+            'task_plan': [],
             'processed_chunks': [],
             'results': []
         }
 
     def default_chunking(self, text, max_size):
-        return split_text_to_chunks(text, max_size)
+        # Split text into sentences safely under max_size limit
+        sentences = re.split(r'(?<=[.!?])\s+', text)
+        chunks = []
+        current_chunk = ""
+
+        for sentence in sentences:
+            if len(current_chunk) + len(sentence) + 1 <= max_size:
+                current_chunk += (" " if current_chunk else "") + sentence
+            else:
+                chunks.append(current_chunk)
+                current_chunk = sentence
+        if current_chunk:
+            chunks.append(current_chunk)
+        return chunks
 
     def preprocess_input(self, input_text):
+        # Check if input fits, else chunk
         if len(input_text) <= self.memory['max_chunk_size']:
             return [input_text]
         return self.memory['chunking_strategy'](input_text, self.memory['max_chunk_size'])
 
     def plan_tasks(self, chunks):
-        self.memory['task_plan'] = [f"Process chunk {i+1}" for i in range(len(chunks))]
+        # Plan a subtask per chunk
+        self.memory['task_plan'] = [f"Process chunk {i+1} of {len(chunks)}" for i in range(len(chunks))]
 
-    def execute(self, input_text):
+    def execute(self, input_text, call_tool):
+        # call_tool(chunk) = actual tool call function passed externally
         chunks = self.preprocess_input(input_text)
         self.plan_tasks(chunks)
+
         for idx, chunk in enumerate(chunks):
-            # Replace call_tool with your actual tool call
+            if len(chunk) > self.memory['max_chunk_size']:
+                raise ValueError(f"Chunk {idx+1} too large for tool: {len(chunk)} chars")
+
+            # Optional: You can pass partial results or context here if your tool supports
             result = call_tool(chunk)
             self.memory['processed_chunks'].append(chunk)
             self.memory['results'].append(result)
+
+            # Update memory state, could add dynamic chunking or retry logic here
+
         return self.aggregate_results()
 
     def aggregate_results(self):
+        # Combine chunk results coherently, could add smarter merging here
         return "\n".join(self.memory['results'])
-3. Defensive Check Before Calling the Tool
-Add a check to ensure no chunk exceeds max size before calling the tool:
-
-python
-Copy
-def execute(self, input_text):
-    chunks = self.preprocess_input(input_text)
-    self.plan_tasks(chunks)
-    for idx, chunk in enumerate(chunks):
-        if len(chunk) > self.memory['max_chunk_size']:
-            raise ValueError(f"Chunk {idx} too large for tool: {len(chunk)} chars")
-        result = call_tool(chunk)
-        self.memory['processed_chunks'].append(chunk)
-        self.memory['results'].append(result)
-    return self.aggregate_results()
-4. Debugging Tips
-Print or log chunk sizes:
-
-python
-Copy
-print(f"Total chunks: {len(chunks)}")
-for i, c in enumerate(chunks):
-    print(f"Chunk {i} size: {len(c)}")
-Confirm your tool’s actual max input length. Adjust max_chunk_size accordingly (e.g., if tool max is 4096 tokens, convert tokens to approx chars or use tokenizer).
-
-If your tool uses tokens (like GPT), consider using a tokenizer (e.g., HuggingFace’s tokenizer) to chunk by tokens instead of characters.
-
-5. Example with Tokenizer-based Chunking (Optional)
-If you use a tokenizer:
-
-python
-Copy
-from transformers import AutoTokenizer
-
-tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
-
-def split_text_to_token_chunks(text, max_tokens):
-    tokens = tokenizer.tokenize(text)
-    chunks = []
-    for i in range(0, len(tokens), max_tokens):
-        chunk_tokens = tokens[i:i + max_tokens]
-        chunk_text = tokenizer.convert_tokens_to_string(chunk_tokens)
-        chunks.append(chunk_text)
-    return chunks
-Summary:
-Implement or fix your split_text_to_chunks to guarantee chunks are below max size.
-
-Validate chunk sizes before calling your tool.
-
-Adjust max_chunk_size to match your tool’s real input limits.
-
-Optionally use token-based chunking if your tool counts tokens, not chars.
 
 
+Here’s how it works step-by-step:
+
+Check input size: If the input is already small enough, it sends it as is.
+
+Chunking: If the input is too large, it splits the text into sentences, then groups these sentences into smaller chunks that each fit within the size limit.
+
+Task planning: It plans to process each chunk individually.
+
+Tool calls: It sends each chunk separately to the tool, ensuring no chunk is too big.
+
+Memory: It keeps track of all chunks processed and their results.
+
+Aggregation: After processing all chunks, it combines the results into one final output.

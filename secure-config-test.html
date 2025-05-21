@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LEEWAY™ Secure Configuration Test</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  
+  <!-- IndexedDB library -->
+  <script src="https://cdn.jsdelivr.net/npm/idb-keyval@6/dist/umd.js"></script>
+  
+  <!-- Load config.js first to access environment variables -->
+  <script src="config.js"></script>
+  
+  <!-- LEEWAY™ Secure Configuration -->
+  <script src="leeway-secure-config.js"></script>
+  <script src="leeway-env.js"></script>
+  <script src="leeway-api-keys.js"></script>
+  
+  <!-- LEEWAY™ Configuration -->
+  <script src="leeway-config.js"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-2xl font-bold mb-6">LEEWAY™ Secure Configuration Test</h1>
+    
+    <!-- Environment Variables -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+      <h2 class="text-xl font-semibold mb-4">Environment Variables</h2>
+      
+      <div class="mb-4">
+        <label class="block text-gray-700 mb-2">Environment Variable Name:</label>
+        <div class="flex">
+          <input type="text" id="env-name" class="flex-1 border rounded-l px-4 py-2" placeholder="e.g., GEMINI_API_KEY">
+          <button id="get-env-btn" class="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-600">Get Value</button>
+        </div>
+      </div>
+      
+      <div class="mb-4">
+        <label class="block text-gray-700 mb-2">Set Environment Variable:</label>
+        <div class="grid grid-cols-2 gap-2">
+          <input type="text" id="env-set-name" class="border rounded px-4 py-2" placeholder="Name">
+          <input type="text" id="env-set-value" class="border rounded px-4 py-2" placeholder="Value">
+        </div>
+        <button id="set-env-btn" class="mt-2 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Set Value</button>
+      </div>
+      
+      <div class="mt-4">
+        <label class="block text-gray-700 mb-2">Result:</label>
+        <div id="env-result" class="bg-gray-100 p-4 rounded min-h-[60px]"></div>
+      </div>
+    </div>
+    
+    <!-- API Keys -->
+    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+      <h2 class="text-xl font-semibold mb-4">API Keys</h2>
+      
+      <div class="mb-4">
+        <label class="block text-gray-700 mb-2">Service Name:</label>
+        <div class="flex">
+          <input type="text" id="api-service" class="flex-1 border rounded-l px-4 py-2" placeholder="e.g., gemini">
+          <button id="get-api-btn" class="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-600">Get Key</button>
+        </div>
+      </div>
+      
+      <div class="mb-4">
+        <label class="block text-gray-700 mb-2">Set API Key:</label>
+        <div class="grid grid-cols-2 gap-2">
+          <input type="text" id="api-set-service" class="border rounded px-4 py-2" placeholder="Service">
+          <input type="text" id="api-set-key" class="border rounded px-4 py-2" placeholder="API Key">
+        </div>
+        <button id="set-api-btn" class="mt-2 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Set Key</button>
+      </div>
+      
+      <div class="mb-4">
+        <label class="block text-gray-700 mb-2">Rotate API Key:</label>
+        <div class="grid grid-cols-2 gap-2">
+          <input type="text" id="api-rotate-service" class="border rounded px-4 py-2" placeholder="Service">
+          <input type="text" id="api-rotate-key" class="border rounded px-4 py-2" placeholder="New API Key">
+        </div>
+        <button id="rotate-api-btn" class="mt-2 bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Rotate Key</button>
+      </div>
+      
+      <div class="mt-4">
+        <label class="block text-gray-700 mb-2">Result:</label>
+        <div id="api-result" class="bg-gray-100 p-4 rounded min-h-[60px]"></div>
+      </div>
+    </div>
+    
+    <!-- Secure Config -->
+    <div class="bg-white rounded-lg shadow-md p-6">
+      <h2 class="text-xl font-semibold mb-4">Secure Configuration</h2>
+      
+      <div class="mb-4">
+        <label class="block text-gray-700 mb-2">Configuration Path:</label>
+        <div class="flex">
+          <input type="text" id="config-path" class="flex-1 border rounded-l px-4 py-2" placeholder="e.g., ai.gemini.apiKey">
+          <button id="get-config-btn" class="bg-blue-500 text-white px-4 py-2 rounded-r hover:bg-blue-600">Get Value</button>
+        </div>
+      </div>
+      
+      <div class="mb-4">
+        <label class="block text-gray-700 mb-2">Set Configuration:</label>
+        <div class="grid grid-cols-2 gap-2">
+          <input type="text" id="config-set-path" class="border rounded px-4 py-2" placeholder="Path">
+          <input type="text" id="config-set-value" class="border rounded px-4 py-2" placeholder="Value">
+        </div>
+        <button id="set-config-btn" class="mt-2 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Set Value</button>
+      </div>
+      
+      <div class="mt-4">
+        <label class="block text-gray-700 mb-2">Result:</label>
+        <div id="config-result" class="bg-gray-100 p-4 rounded min-h-[60px]"></div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Wait for document to be ready
+    document.addEventListener('DOMContentLoaded', function() {
+      // Wait for secure configuration to initialize
+      setTimeout(async function() {
+        // Environment Variables
+        document.getElementById('get-env-btn').addEventListener('click', function() {
+          const name = document.getElementById('env-name').value;
+          if (!name) return;
+          
+          const value = window.LeewayEnv.get(name);
+          document.getElementById('env-result').textContent = `${name}: ${value}`;
+        });
+        
+        document.getElementById('set-env-btn').addEventListener('click', async function() {
+          const name = document.getElementById('env-set-name').value;
+          const value = document.getElementById('env-set-value').value;
+          if (!name || !value) return;
+          
+          window.LeewayEnv.set(name, value);
+          await window.LeewayEnv.save(true);
+          
+          document.getElementById('env-result').textContent = `Set ${name} to ${value} and saved to secure storage`;
+        });
+        
+        // API Keys
+        document.getElementById('get-api-btn').addEventListener('click', function() {
+          const service = document.getElementById('api-service').value;
+          if (!service) return;
+          
+          const key = window.LeewayApiKeys.getKey(service);
+          const needsRotation = window.LeewayApiKeys.needsRotation(service);
+          
+          let resultText = `Service: ${service}\nAPI Key: `;
+          
+          if (key) {
+            // Mask the key for display
+            const maskedKey = key.length > 4 ? 
+              '****' + key.substring(key.length - 4) : 
+              '****';
+            
+            resultText += maskedKey;
+            
+            if (needsRotation) {
+              resultText += '\n\nThis key needs rotation!';
+            }
+          } else {
+            resultText += 'Not found';
+          }
+          
+          document.getElementById('api-result').textContent = resultText;
+        });
+        
+        document.getElementById('set-api-btn').addEventListener('click', async function() {
+          const service = document.getElementById('api-set-service').value;
+          const key = document.getElementById('api-set-key').value;
+          if (!service || !key) return;
+          
+          await window.LeewayApiKeys.setKey(service, key);
+          
+          document.getElementById('api-result').textContent = `Set API key for ${service}`;
+        });
+        
+        document.getElementById('rotate-api-btn').addEventListener('click', async function() {
+          const service = document.getElementById('api-rotate-service').value;
+          const key = document.getElementById('api-rotate-key').value;
+          if (!service || !key) return;
+          
+          await window.LeewayApiKeys.rotateKey(service, key);
+          
+          document.getElementById('api-result').textContent = `Rotated API key for ${service}`;
+        });
+        
+        // Secure Config
+        document.getElementById('get-config-btn').addEventListener('click', function() {
+          const path = document.getElementById('config-path').value;
+          if (!path) return;
+          
+          const value = window.LeewaySecureConfig.get(path);
+          document.getElementById('config-result').textContent = `${path}: ${value}`;
+        });
+        
+        document.getElementById('set-config-btn').addEventListener('click', async function() {
+          const path = document.getElementById('config-set-path').value;
+          const value = document.getElementById('config-set-value').value;
+          if (!path || !value) return;
+          
+          await window.LeewaySecureConfig.set(path, value);
+          
+          document.getElementById('config-result').textContent = `Set ${path} to ${value}`;
+        });
+      }, 1000);
+    });
+  </script>
+</body>
+</html>

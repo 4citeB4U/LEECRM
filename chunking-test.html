@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LEEWAY™ Chunking Test</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- IndexedDB library -->
+  <script src="https://cdn.jsdelivr.net/npm/idb-keyval@6/dist/umd.js"></script>
+  
+  <!-- Load config.js first to access environment variables -->
+  <script src="config.js"></script>
+  
+  <!-- LEEWAY™ Secure Configuration -->
+  <script src="leeway-secure-config.js"></script>
+  <script src="leeway-env.js"></script>
+  <script src="leeway-api-keys.js"></script>
+  
+  <!-- LEEWAY™ Configuration -->
+  <script src="leeway-config.js"></script>
+  
+  <!-- LEEWAY™ Compatible Technologies -->
+  <script src="leeway-technologies.js"></script>
+  <script src="leeway-analytics.js"></script>
+  <script src="leeway-mapping.js"></script>
+  <script src="leeway-ai.js"></script>
+  <script src="leeway-integration.js"></script>
+  
+  <!-- LEEWAY™ Chunking -->
+  <script src="leeway-chunking.js"></script>
+</head>
+<body class="bg-gray-100 min-h-screen p-8">
+  <div class="max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold mb-6">LEEWAY™ Chunking Test</h1>
+    
+    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+      <h2 class="text-xl font-semibold mb-4">Input Text</h2>
+      
+      <div class="mb-4">
+        <textarea id="input-text" class="w-full h-40 border rounded-md p-3" placeholder="Enter text to chunk..."></textarea>
+      </div>
+      
+      <div class="flex flex-wrap gap-4 mb-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Max Chunk Size (chars)</label>
+          <input type="number" id="max-chunk-size" class="border rounded-md px-3 py-2" value="1000">
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Chunking Method</label>
+          <select id="chunking-method" class="border rounded-md px-3 py-2">
+            <option value="sentence">Sentence-based</option>
+            <option value="token">Token-based</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="flex justify-between">
+        <button id="chunk-btn" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+          Split into Chunks
+        </button>
+        
+        <button id="process-btn" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">
+          Process with AI
+        </button>
+      </div>
+    </div>
+    
+    <div class="bg-white rounded-lg shadow-md p-6 mb-6">
+      <h2 class="text-xl font-semibold mb-4">Chunks</h2>
+      
+      <div id="chunks-container" class="space-y-4">
+        <div class="text-gray-500 italic">No chunks generated yet.</div>
+      </div>
+    </div>
+    
+    <div class="bg-white rounded-lg shadow-md p-6">
+      <h2 class="text-xl font-semibold mb-4">Processing Results</h2>
+      
+      <div id="progress-container" class="mb-4 hidden">
+        <div class="w-full bg-gray-200 rounded-full h-2.5">
+          <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
+        </div>
+        <div id="progress-text" class="text-sm text-gray-600 mt-1">Processing: 0%</div>
+      </div>
+      
+      <div id="results-container" class="border rounded-md p-4 bg-gray-50 min-h-[200px]">
+        <div class="text-gray-500 italic">No results yet.</div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Wait for LEEWAY™ technologies to initialize
+      setTimeout(function() {
+        // Elements
+        const inputText = document.getElementById('input-text');
+        const maxChunkSize = document.getElementById('max-chunk-size');
+        const chunkingMethod = document.getElementById('chunking-method');
+        const chunkBtn = document.getElementById('chunk-btn');
+        const processBtn = document.getElementById('process-btn');
+        const chunksContainer = document.getElementById('chunks-container');
+        const progressContainer = document.getElementById('progress-container');
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress-text');
+        const resultsContainer = document.getElementById('results-container');
+        
+        // Sample text
+        inputText.value = `The LEEWAY™ CRM system is designed to be a comprehensive solution for music distribution businesses. It features voice dictation, visit tracking, to-do lists, analytics, mapping, and email campaign capabilities.
+
+One of the key challenges in modern AI systems is handling large inputs that exceed the context window of the underlying models. This is where chunking becomes essential. By breaking down large texts into manageable pieces, we can process them effectively while maintaining context and coherence.
+
+The chunking algorithm implemented in this system uses sentence boundaries as natural splitting points. This preserves the semantic meaning of the text while ensuring that no chunk exceeds the maximum size limit. For cases where a single sentence is longer than the maximum chunk size, we have fallback mechanisms to split by words or even characters if necessary.
+
+When processing chunks with AI, it's important to maintain context between chunks. This can be achieved by including a small amount of overlap between consecutive chunks, or by providing a summary of previous chunks as context for processing the current chunk.
+
+The AgenticController class manages the entire chunking and processing workflow. It handles preprocessing the input, planning the tasks, executing the processing function on each chunk, and aggregating the results. It also provides progress updates through custom events.
+
+This approach allows the LEEWAY™ CRM system to handle inputs of any size, making it robust and scalable for various use cases in the music distribution industry.`;
+        
+        // Initialize AgenticController
+        let controller = new LeewayChunking.AgenticController({
+          maxChunkSize: parseInt(maxChunkSize.value),
+          aiProvider: window.LeewayAI
+        });
+        
+        // Add event listeners
+        chunkBtn.addEventListener('click', function() {
+          // Get input values
+          const text = inputText.value;
+          const maxSize = parseInt(maxChunkSize.value);
+          const method = chunkingMethod.value;
+          
+          // Split text into chunks
+          let chunks;
+          if (method === 'sentence') {
+            chunks = LeewayChunking.splitTextToChunks(text, maxSize);
+          } else {
+            // Convert maxSize from chars to tokens (rough approximation)
+            const maxTokens = Math.floor(maxSize / 4);
+            chunks = LeewayChunking.splitTextToTokenChunks(text, maxTokens);
+          }
+          
+          // Display chunks
+          displayChunks(chunks);
+        });
+        
+        processBtn.addEventListener('click', async function() {
+          // Show progress container
+          progressContainer.classList.remove('hidden');
+          progressBar.style.width = '0%';
+          progressText.textContent = 'Processing: 0%';
+          
+          // Clear results
+          resultsContainer.innerHTML = '<div class="animate-pulse">Processing...</div>';
+          
+          try {
+            // Get input values
+            const text = inputText.value;
+            const maxSize = parseInt(maxChunkSize.value);
+            
+            // Update controller with new max chunk size
+            controller = new LeewayChunking.AgenticController({
+              maxChunkSize: maxSize,
+              aiProvider: window.LeewayAI
+            });
+            
+            // Process text with AI
+            const result = await controller.execute(text, async (chunk, index) => {
+              // Create a prompt for the AI
+              const prompt = `Summarize the following text in 2-3 sentences:
+              
+              ${chunk}
+              
+              Summary:`;
+              
+              // Process with AI
+              if (window.LeewayAI) {
+                return await window.LeewayAI.generateText(prompt);
+              } else {
+                return `[Simulated AI summary for chunk ${index + 1}]`;
+              }
+            });
+            
+            // Display results
+            resultsContainer.innerHTML = `<div class="whitespace-pre-wrap">${result}</div>`;
+          } catch (error) {
+            console.error('Error processing text:', error);
+            resultsContainer.innerHTML = `<div class="text-red-500">Error: ${error.message}</div>`;
+          }
+        });
+        
+        // Listen for progress events
+        document.addEventListener('leeway-chunking-progress', function(event) {
+          const { current, total, percentage } = event.detail;
+          
+          // Update progress bar
+          progressBar.style.width = `${percentage}%`;
+          progressText.textContent = `Processing: ${percentage}% (${current}/${total})`;
+        });
+        
+        // Function to display chunks
+        function displayChunks(chunks) {
+          if (!chunks || chunks.length === 0) {
+            chunksContainer.innerHTML = '<div class="text-gray-500 italic">No chunks generated.</div>';
+            return;
+          }
+          
+          chunksContainer.innerHTML = '';
+          
+          chunks.forEach((chunk, index) => {
+            const chunkElement = document.createElement('div');
+            chunkElement.className = 'border rounded-md p-4 bg-gray-50';
+            
+            const tokenCount = LeewayChunking.estimateTokenCount(chunk);
+            
+            chunkElement.innerHTML = `
+              <div class="flex justify-between items-center mb-2">
+                <h3 class="font-medium">Chunk ${index + 1}</h3>
+                <span class="text-xs text-gray-500">${chunk.length} chars / ~${tokenCount} tokens</span>
+              </div>
+              <div class="whitespace-pre-wrap text-sm">${chunk}</div>
+            `;
+            
+            chunksContainer.appendChild(chunkElement);
+          });
+        }
+      }, 2000);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LEEWAY™ AI Features Test</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- IndexedDB library -->
+  <script src="https://cdn.jsdelivr.net/npm/idb-keyval@6/dist/umd.js"></script>
+  
+  <!-- Load config.js first to access environment variables -->
+  <script src="config.js"></script>
+  
+  <!-- LEEWAY™ Secure Configuration -->
+  <script src="leeway-secure-config.js"></script>
+  <script src="leeway-env.js"></script>
+  <script src="leeway-api-keys.js"></script>
+  
+  <!-- LEEWAY™ Configuration -->
+  <script src="leeway-config.js"></script>
+  
+  <!-- LEEWAY™ Compatible Technologies -->
+  <script src="leeway-technologies.js"></script>
+  <script src="leeway-analytics.js"></script>
+  <script src="leeway-mapping.js"></script>
+  <script src="leeway-ai.js"></script>
+  <script src="leeway-chunking.js"></script>
+  <script src="leeway-ai-features.js"></script>
+  <script src="leeway-integration.js"></script>
+</head>
+<body class="bg-gray-100 min-h-screen p-8">
+  <div class="max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold mb-6">LEEWAY™ AI Features Test</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- To-Dos Test -->
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold mb-4">AI-Assisted To-Dos</h2>
+        
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Voice Input (Simulated)</label>
+          <textarea id="todo-input" class="w-full h-20 border rounded-md p-3" placeholder="Enter text to extract to-do..."></textarea>
+        </div>
+        
+        <button id="extract-todo-btn" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 mb-4">
+          Extract To-Do
+        </button>
+        
+        <div id="todo-result" class="border rounded-md p-4 bg-gray-50 min-h-[100px]">
+          <div class="text-gray-500 italic">No to-do extracted yet.</div>
+        </div>
+      </div>
+      
+      <!-- Timeline Test -->
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold mb-4">AI-Powered Timeline</h2>
+        
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Event Text</label>
+          <textarea id="timeline-input" class="w-full h-20 border rounded-md p-3" placeholder="Enter text to summarize for timeline..."></textarea>
+        </div>
+        
+        <button id="summarize-event-btn" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 mb-4">
+          Summarize Event
+        </button>
+        
+        <div id="timeline-result" class="border rounded-md p-4 bg-gray-50 min-h-[100px]">
+          <div class="text-gray-500 italic">No event summarized yet.</div>
+        </div>
+      </div>
+      
+      <!-- Business Card Test -->
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold mb-4">AI-Generated Business Card</h2>
+        
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Target Audience</label>
+          <select id="card-audience" class="w-full border rounded-md p-2">
+            <option value="music_stores">Music Stores</option>
+            <option value="artists">Artists & Musicians</option>
+            <option value="distributors">Distributors</option>
+            <option value="general">General Business</option>
+          </select>
+        </div>
+        
+        <button id="generate-card-btn" class="px-4 py-2 bg-purple-500 text-white rounded-md hover:bg-purple-600 mb-4">
+          Generate Card Content
+        </button>
+        
+        <div id="card-result" class="border rounded-md p-4 bg-gray-50 min-h-[100px]">
+          <div class="text-gray-500 italic">No card generated yet.</div>
+        </div>
+      </div>
+      
+      <!-- Email Signature Test -->
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-xl font-semibold mb-4">AI-Optimized Email Signature</h2>
+        
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Style</label>
+          <select id="signature-style" class="w-full border rounded-md p-2">
+            <option value="professional">Professional</option>
+            <option value="creative">Creative</option>
+            <option value="minimal">Minimal</option>
+            <option value="detailed">Detailed</option>
+          </select>
+        </div>
+        
+        <button id="generate-signature-btn" class="px-4 py-2 bg-amber-500 text-white rounded-md hover:bg-amber-600 mb-4">
+          Generate Signature
+        </button>
+        
+        <div id="signature-result" class="border rounded-md p-4 bg-gray-50 min-h-[100px]">
+          <div class="text-gray-500 italic">No signature generated yet.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Wait for LEEWAY™ technologies to initialize
+      setTimeout(function() {
+        // Elements
+        const todoInput = document.getElementById('todo-input');
+        const extractTodoBtn = document.getElementById('extract-todo-btn');
+        const todoResult = document.getElementById('todo-result');
+        
+        const timelineInput = document.getElementById('timeline-input');
+        const summarizeEventBtn = document.getElementById('summarize-event-btn');
+        const timelineResult = document.getElementById('timeline-result');
+        
+        const cardAudience = document.getElementById('card-audience');
+        const generateCardBtn = document.getElementById('generate-card-btn');
+        const cardResult = document.getElementById('card-result');
+        
+        const signatureStyle = document.getElementById('signature-style');
+        const generateSignatureBtn = document.getElementById('generate-signature-btn');
+        const signatureResult = document.getElementById('signature-result');
+        
+        // Sample inputs
+        todoInput.value = "I need to follow up with Bay View Studio next Wednesday about their new inventory needs. It's a high priority since they're one of our biggest clients.";
+        
+        timelineInput.value = "Just had a meeting with Rushmor Records. They're interested in our new line of acoustic guitars. They mentioned they might place a large order next month if we can offer a 10% discount. They also asked about our new digital distribution platform.";
+        
+        // Add event listeners
+        extractTodoBtn.addEventListener('click', async function() {
+          todoResult.innerHTML = '<div class="animate-pulse">Processing...</div>';
+          
+          try {
+            const text = todoInput.value;
+            
+            if (!text) {
+              todoResult.innerHTML = '<div class="text-red-500">Please enter some text.</div>';
+              return;
+            }
+            
+            // Extract to-do using AI
+            const todoData = await window.LeewayAIFeatures.extractTodoFromText(text);
+            
+            // Display result
+            todoResult.innerHTML = `
+              <div class="space-y-2">
+                <div class="flex justify-between">
+                  <h3 class="font-medium">${todoData.task}</h3>
+                  <span class="text-xs px-2 py-0.5 rounded-full ${getPriorityClass(todoData.priority)}">${todoData.priority}</span>
+                </div>
+                ${todoData.dueDate ? `<p class="text-xs text-gray-500">Due: ${todoData.dueDate}</p>` : ''}
+                ${todoData.related ? `<p class="text-xs text-gray-500">Related to: ${todoData.related}</p>` : ''}
+                ${todoData.notes ? `<p class="text-sm text-gray-600 mt-2 border-t border-gray-200 pt-2">${todoData.notes}</p>` : ''}
+              </div>
+            `;
+          } catch (error) {
+            console.error('Error extracting to-do:', error);
+            todoResult.innerHTML = `<div class="text-red-500">Error: ${error.message}</div>`;
+          }
+        });
+        
+        summarizeEventBtn.addEventListener('click', async function() {
+          timelineResult.innerHTML = '<div class="animate-pulse">Processing...</div>';
+          
+          try {
+            const text = timelineInput.value;
+            
+            if (!text) {
+              timelineResult.innerHTML = '<div class="text-red-500">Please enter some text.</div>';
+              return;
+            }
+            
+            // Summarize event using AI
+            const prompt = `
+              Summarize the following event text for a timeline entry. 
+              Create a short title (max 5 words) and a brief summary (max 2 sentences).
+              Format as JSON with "title" and "summary" fields.
+              
+              Text: "${text}"
+            `;
+            
+            const response = await window.LeewayAI.generateText(prompt, { temperature: 0.3 });
+            
+            // Try to parse JSON from response
+            try {
+              // Extract JSON from response
+              const jsonMatch = response.match(/\{[\s\S]*\}/);
+              let eventData;
+              
+              if (jsonMatch) {
+                eventData = JSON.parse(jsonMatch[0]);
+              } else {
+                // Fallback if JSON parsing fails
+                eventData = {
+                  title: "Meeting Summary",
+                  summary: response.substring(0, 100) + "..."
+                };
+              }
+              
+              // Display result
+              timelineResult.innerHTML = `
+                <div class="space-y-2">
+                  <h3 class="font-medium">${eventData.title}</h3>
+                  <p class="text-sm text-gray-600">${eventData.summary}</p>
+                  <div class="flex items-center mt-2">
+                    <span class="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">Meeting</span>
+                    <span class="text-xs text-gray-500 ml-2">Today, ${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                  </div>
+                </div>
+              `;
+            } catch (parseError) {
+              console.error('Error parsing AI response:', parseError);
+              timelineResult.innerHTML = `<div class="text-red-500">Error parsing response: ${parseError.message}</div>`;
+            }
+          } catch (error) {
+            console.error('Error summarizing event:', error);
+            timelineResult.innerHTML = `<div class="text-red-500">Error: ${error.message}</div>`;
+          }
+        });
+        
+        generateCardBtn.addEventListener('click', async function() {
+          cardResult.innerHTML = '<div class="animate-pulse">Processing...</div>';
+          
+          try {
+            const audience = cardAudience.value;
+            
+            // Generate business card content using AI
+            const prompt = `
+              Generate business card content for Leonard Lee, a music distribution agent.
+              The card is targeted at: ${audience.replace('_', ' ')}.
+              Include a tagline and key information that would appeal to this audience.
+              Format as JSON with "name", "title", "tagline", "contact" (email and phone), and "highlights" (array of 2-3 key points) fields.
+            `;
+            
+            const response = await window.LeewayAI.generateText(prompt, { temperature: 0.7 });
+            
+            // Try to parse JSON from response
+            try {
+              // Extract JSON from response
+              const jsonMatch = response.match(/\{[\s\S]*\}/);
+              let cardData;
+              
+              if (jsonMatch) {
+                cardData = JSON.parse(jsonMatch[0]);
+              } else {
+                // Fallback if JSON parsing fails
+                cardData = {
+                  name: "Leonard Lee",
+                  title: "Music Distribution Agent",
+                  tagline: "Connecting Artists with Audiences",
+                  contact: {
+                    email: "leonard@leemusicdistribution.com",
+                    phone: "414-555-1234"
+                  },
+                  highlights: [
+                    "Personalized Distribution Solutions",
+                    "Industry Connections",
+                    "Artist-Focused Approach"
+                  ]
+                };
+              }
+              
+              // Display result
+              cardResult.innerHTML = `
+                <div class="p-4 border rounded-md bg-gradient-to-r from-blue-50 to-purple-50">
+                  <h3 class="text-xl font-bold text-gray-800">${cardData.name}</h3>
+                  <p class="text-sm text-gray-600">${cardData.title}</p>
+                  <p class="text-sm font-medium text-blue-600 mt-1 italic">${cardData.tagline}</p>
+                  
+                  <div class="mt-3 space-y-1 text-sm">
+                    <p class="text-gray-700">${cardData.contact.email}</p>
+                    <p class="text-gray-700">${cardData.contact.phone}</p>
+                  </div>
+                  
+                  <div class="mt-3 pt-2 border-t border-gray-200">
+                    <ul class="text-xs text-gray-600 space-y-1">
+                      ${cardData.highlights.map(highlight => `<li>• ${highlight}</li>`).join('')}
+                    </ul>
+                  </div>
+                </div>
+              `;
+            } catch (parseError) {
+              console.error('Error parsing AI response:', parseError);
+              cardResult.innerHTML = `<div class="text-red-500">Error parsing response: ${parseError.message}</div>`;
+            }
+          } catch (error) {
+            console.error('Error generating business card:', error);
+            cardResult.innerHTML = `<div class="text-red-500">Error: ${error.message}</div>`;
+          }
+        });
+        
+        generateSignatureBtn.addEventListener('click', async function() {
+          signatureResult.innerHTML = '<div class="animate-pulse">Processing...</div>';
+          
+          try {
+            const style = signatureStyle.value;
+            
+            // Generate email signature using AI
+            const prompt = `
+              Generate an email signature for Leonard Lee, a music distribution agent.
+              Style: ${style}
+              Include name, title, contact information, and a brief tagline.
+              Format as HTML that can be directly used in an email signature.
+              Keep it concise and professional.
+            `;
+            
+            const response = await window.LeewayAI.generateText(prompt, { temperature: 0.7 });
+            
+            // Display result
+            signatureResult.innerHTML = `
+              <div class="space-y-2">
+                <div class="border p-4 rounded-md bg-white">
+                  ${response}
+                </div>
+                <div class="text-xs text-gray-500 mt-2">
+                  <p>HTML code is ready to be copied into your email client.</p>
+                </div>
+              </div>
+            `;
+          } catch (error) {
+            console.error('Error generating email signature:', error);
+            signatureResult.innerHTML = `<div class="text-red-500">Error: ${error.message}</div>`;
+          }
+        });
+        
+        // Helper function to get priority class
+        function getPriorityClass(priority) {
+          switch (priority) {
+            case 'High':
+              return 'bg-red-100 text-red-800';
+            case 'Medium':
+              return 'bg-amber-100 text-amber-800';
+            case 'Low':
+              return 'bg-green-100 text-green-800';
+            default:
+              return 'bg-gray-100 text-gray-800';
+          }
+        }
+      }, 2000);
+    });
+  </script>
+</body>
+</html>
